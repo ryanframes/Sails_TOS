@@ -1,0 +1,88 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Sails_TOS
+</name>
+</assembly>
+<members>
+<member name="T:Sails_TOS.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Add">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Cancel">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Delete">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Edit">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Save_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Search">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:Sails_TOS.mdlFunctionGeneral.autoColWidth(System.Int32,System.Windows.Forms.DataGridView)">
+ <summary>
+ Set Col Grid auto fill 
+ </summary>
+ <param name="colNum"></param>
+ <param name="dg"></param>
+</member>
+<member name="M:Sails_TOS.mdlFunctionGeneral.showDataGrid(System.Windows.Forms.DataGridView,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+ <summary>
+ Fungsi untuk mengisi datagridview dari API. 
+ Contoh mendapatkan hasil Json dari : http://localhost:8080/rts_mchtyp_getdata.
+ Hasil JSON di convert ke datatable untuk dijadikan datasource datagridview.
+ </summary>
+ <param name="objGrid">DataGridView yang akan di isi dengan record</param>
+ <param name="apiAddress">Alamat IPAddress API</param>
+ <param name="apiRoute">Nama Route Lumen / Nama Fungsi API</param>
+ <param name="cols">List of Dictionary Kolom(ColName di Database,Caption ColName yang ingin ditampilkan0 </param>
+ <param name="apiParams">Parameter API</param>
+ <returns></returns>
+</member>
+<member name="M:Sails_TOS.mdlFunctionGeneral.getDataFromAPI(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+ <summary>
+ Fungsi untuk mendapatkan data dari API.
+ Contoh mendapatkan hasil Json dari : http://localhost:8080/rts_mchtyp_getdata.
+ Hasil JSON di convert ke datatable.
+ </summary>
+ <param name="apiAddress">Alamat IPAddress API</param>
+ <param name="apiRoute">Nama Route Lumen / Nama Fungsi API</param>
+ <param name="arrCols">Nama Kolom Grid</param>
+ <param name="apiParams">Parameter API</param>
+ <returns></returns>
+</member>
+</members>
+</doc>

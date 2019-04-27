@@ -1,0 +1,40 @@
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbprojAssemblyReference.cache
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Resources.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.GenerateResource.cache
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.CoreCompileInputs.cache
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.exe.config
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.exe
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.pdb
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DevComponents.DotNetBar2.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Newtonsoft.Json.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DevComponents.DotNetBar2.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Newtonsoft.Json.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.CopyComplete
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.exe
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.pdb
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.exe.config
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.exe
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.pdb
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Sails_TOS.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Newtonsoft.Json.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DevComponents.DotNetBar2.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Newtonsoft.Json.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbprojAssemblyReference.cache
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTemplates.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Resources.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.GenerateResource.cache
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.CoreCompileInputs.cache
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.CopyComplete
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.exe
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.pdb
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DevComponents.DotNetBar2.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode_Input.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Form1.resources
