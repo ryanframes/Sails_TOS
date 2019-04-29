@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Sails_TOS.Form1
+            Me.MainForm = Global.Sails_TOS.FormYardDefinition
         End Sub
     End Class
 End Namespace

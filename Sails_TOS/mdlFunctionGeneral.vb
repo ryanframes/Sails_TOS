@@ -155,6 +155,7 @@ Module mdlFunctionGeneral
             Return tblret
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show("Error : " & ex.Message.ToString, "Warning", MessageBoxButtons.OK)
+            WriteErrorLog(Now(), "Services " & apiRoute & ":", ex.Message)
             Return Nothing
         End Try
     End Function
@@ -180,6 +181,7 @@ Module mdlFunctionGeneral
             Return status
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show("Error : " & ex.Message.ToString, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            WriteErrorLog(Now(), "Services " & apiRoute & ":", ex.Message)
             Return False
         End Try
     End Function
@@ -212,4 +214,13 @@ Module mdlFunctionGeneral
         Dim res As DialogResult = MessageBoxEx.Show("Are you sure want to delete selected data ?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         Return res
     End Function
+
+    Public Sub WriteErrorLog(ByVal v_time As String, v_service As String, v_error As String)
+        Dim strFileName As String = "errorlog.ini"
+        Dim strPath As String = Application.StartupPath
+
+        System.IO.File.AppendAllText((strPath & Convert.ToString("\")) &
+                                     strFileName, (DateTime.Now.ToString() + " - " + v_service + " - " + v_error + vbCr & vbLf))
+    End Sub
+
 End Module

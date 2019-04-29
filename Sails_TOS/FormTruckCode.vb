@@ -22,7 +22,7 @@ Public Class FormTruckCode
 
         'add col check
         Dim chk As New DataGridViewCheckBoxColumn
-        chk.HeaderText = " "
+        chk.HeaderText = "Select"
         chk.Name = "Pilih"
         grid_truck_code.Columns.Insert(0, chk)
         grid_truck_code.Columns("TRUCK_ID").Visible = False

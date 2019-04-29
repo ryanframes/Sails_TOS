@@ -38,3 +38,4 @@ E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DevComponents.DotNetBar2.dll
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode.resources
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode_Input.resources
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Form1.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormYardDefinition.resources

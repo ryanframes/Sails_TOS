@@ -107,6 +107,18 @@
     <Compile Include="FormTruckCode_Input.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormYardDefinition.Designer.vb">
+      <DependentUpon>FormYardDefinition.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormYardDefinition.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormYardDefinition_Input.Designer.vb">
+      <DependentUpon>FormYardDefinition_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormYardDefinition_Input.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="mdlFunctionGeneral.vb" />
     <Compile Include="Mdl_FileConf.vb" />
     <Compile Include="Mdl_mchtyp.vb" />
@@ -142,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTruckCode_Input.resx">
       <DependentUpon>FormTruckCode_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormYardDefinition.resx">
+      <DependentUpon>FormYardDefinition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormYardDefinition_Input.resx">
+      <DependentUpon>FormYardDefinition_Input.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
