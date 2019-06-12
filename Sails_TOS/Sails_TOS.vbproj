@@ -48,7 +48,23 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\packages\LumenWorksCsvReader.4.0.0\lib\net45\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -62,6 +78,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -77,52 +94,217 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component1.Designer.vb">
+      <DependentUpon>Component1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Component1.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMachineType.Designer.vb">
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAuthentification.Designer.vb">
+      <DependentUpon>FormAuthentification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAuthentification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiry.Designer.vb">
+      <DependentUpon>FormContainerInquiry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryDateTime.Designer.vb">
+      <DependentUpon>FormContainerInquiryDateTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryDateTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryHold.Designer.vb">
+      <DependentUpon>FormContainerInquiryHold.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryHold.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode.Designer.vb">
+      <DependentUpon>FormDamageCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputGrade.Designer.vb">
+      <DependentUpon>FormDamageCode_InputGrade.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputGrade.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputPart.Designer.vb">
+      <DependentUpon>FormDamageCode_InputPart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputPart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputType.Designer.vb">
+      <DependentUpon>FormDamageCode_InputType.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDamageCode_InputType.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormFindContainer.Designer.vb">
+      <DependentUpon>FormFindContainer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormFindContainer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHRMchDriver.Designer.vb">
+      <DependentUpon>FormHRMchDriver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHRMchDriver.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInboundData.Designer.vb">
+      <DependentUpon>FormInboundData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInboundData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInboundData_Input.Designer.vb">
+      <DependentUpon>FormInboundData_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInboundData_Input.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInboundData_UploadBaplie.Designer.vb">
+      <DependentUpon>FormInboundData_UploadBaplie.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInboundData_UploadBaplie.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryJobHistory.Designer.vb">
+      <DependentUpon>FormContainerInquiryJobHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContainerInquiryJobHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormITV.Designer.vb">
+      <DependentUpon>FormITV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormITV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormJobController.Designer.vb">
+      <DependentUpon>FormJobController.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormJobController.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormJobControl_Input.Designer.vb">
+      <DependentUpon>FormJobControl_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormJobControl_Input.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMachineSpec.Designer.vb">
+      <DependentUpon>FormMachineSpec.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMachineSpec.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMachineSpec_Input.Designer.vb">
+      <DependentUpon>FormMachineSpec_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMachineSpec_Input.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMachineType.Designer.vb">
       <DependentUpon>FormMachineType.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormMachineType.vb">
+    <Compile Include="Forms\FormMachineType.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMachineType_Input.Designer.vb">
+    <Compile Include="Forms\FormMachineType_Input.Designer.vb">
       <DependentUpon>FormMachineType_Input.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormMachineType_Input.vb">
+    <Compile Include="Forms\FormMachineType_Input.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormTruckCode.Designer.vb">
+    <Compile Include="Forms\FormQuayLane.Designer.vb">
+      <DependentUpon>FormQuayLane.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormQuayLane.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTruckCode.Designer.vb">
       <DependentUpon>FormTruckCode.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormTruckCode.vb">
+    <Compile Include="Forms\FormTruckCode.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormTruckCode_Input.Designer.vb">
+    <Compile Include="Forms\FormTruckCode_Input.Designer.vb">
       <DependentUpon>FormTruckCode_Input.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormTruckCode_Input.vb">
+    <Compile Include="Forms\FormTruckCode_Input.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormYardDefinition.Designer.vb">
+    <Compile Include="Forms\FormVMT.Designer.vb">
+      <DependentUpon>FormVMT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormVMT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormYardDefinition.Designer.vb">
       <DependentUpon>FormYardDefinition.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormYardDefinition.vb">
+    <Compile Include="Forms\FormYardDefinition.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormYardDefinition_Input.Designer.vb">
+    <Compile Include="Forms\FormYardDefinition_Input.Designer.vb">
       <DependentUpon>FormYardDefinition_Input.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormYardDefinition_Input.vb">
+    <Compile Include="Forms\FormYardDefinition_Input.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mdlFunctionGeneral.vb" />
-    <Compile Include="Mdl_FileConf.vb" />
-    <Compile Include="Mdl_mchtyp.vb" />
-    <Compile Include="Mdl_trucde.vb" />
+    <Compile Include="Forms\FormYardDefinition_InputSlot.Designer.vb">
+      <DependentUpon>FormYardDefinition_InputSlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormYardDefinition_InputSlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MDIForm.Designer.vb">
+      <DependentUpon>MDIForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MDIForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\mdlFunctionGeneral.vb" />
+    <Compile Include="Modules\Mdl_dmgcde.vb" />
+    <Compile Include="Modules\Mdl_FileConf.vb" />
+    <Compile Include="Modules\Mdl_fndctr.vb" />
+    <Compile Include="Modules\Mdl_hrmchdvr.vb" />
+    <Compile Include="Modules\Mdl_inbdta.vb" />
+    <Compile Include="Modules\Mdl_Inqctr.vb" />
+    <Compile Include="Modules\Mdl_jobctr.vb" />
+    <Compile Include="Modules\Mdl_mchlne.vb" />
+    <Compile Include="Modules\Mdl_mchspc.vb" />
+    <Compile Include="Modules\Mdl_mchtyp.vb" />
+    <Compile Include="Modules\Mdl_quylne.vb" />
+    <Compile Include="Modules\Mdl_trucde.vb" />
+    <Compile Include="Modules\Mdl_vessched.vb" />
+    <Compile Include="Modules\Mdl_vmtauth.vb" />
+    <Compile Include="Modules\Mdl_yrddef.vb" />
+    <Compile Include="Modules\TextBoxAutoComplete.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -142,24 +324,98 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMachineType.resx">
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAuthentification.resx">
+      <DependentUpon>FormAuthentification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContainerInquiry.resx">
+      <DependentUpon>FormContainerInquiry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContainerInquiryDateTime.resx">
+      <DependentUpon>FormContainerInquiryDateTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContainerInquiryHold.resx">
+      <DependentUpon>FormContainerInquiryHold.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContainerInquiryJobHistory.resx">
+      <DependentUpon>FormContainerInquiryJobHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDamageCode.resx">
+      <DependentUpon>FormDamageCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDamageCode_InputGrade.resx">
+      <DependentUpon>FormDamageCode_InputGrade.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDamageCode_InputPart.resx">
+      <DependentUpon>FormDamageCode_InputPart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDamageCode_InputType.resx">
+      <DependentUpon>FormDamageCode_InputType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormFindContainer.resx">
+      <DependentUpon>FormFindContainer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHRMchDriver.resx">
+      <DependentUpon>FormHRMchDriver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInboundData.resx">
+      <DependentUpon>FormInboundData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInboundData_Input.resx">
+      <DependentUpon>FormInboundData_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInboundData_UploadBaplie.resx">
+      <DependentUpon>FormInboundData_UploadBaplie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormITV.resx">
+      <DependentUpon>FormITV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormJobController.resx">
+      <DependentUpon>FormJobController.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormJobControl_Input.resx">
+      <DependentUpon>FormJobControl_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMachineSpec.resx">
+      <DependentUpon>FormMachineSpec.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMachineSpec_Input.resx">
+      <DependentUpon>FormMachineSpec_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMachineType.resx">
       <DependentUpon>FormMachineType.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMachineType_Input.resx">
+    <EmbeddedResource Include="Forms\FormMachineType_Input.resx">
       <DependentUpon>FormMachineType_Input.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormTruckCode.resx">
+    <EmbeddedResource Include="Forms\FormQuayLane.resx">
+      <DependentUpon>FormQuayLane.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTruckCode.resx">
       <DependentUpon>FormTruckCode.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormTruckCode_Input.resx">
+    <EmbeddedResource Include="Forms\FormTruckCode_Input.resx">
       <DependentUpon>FormTruckCode_Input.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormYardDefinition.resx">
+    <EmbeddedResource Include="Forms\FormVMT.resx">
+      <DependentUpon>FormVMT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormYardDefinition.resx">
       <DependentUpon>FormYardDefinition.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormYardDefinition_Input.resx">
+    <EmbeddedResource Include="Forms\FormYardDefinition_Input.resx">
       <DependentUpon>FormYardDefinition_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormYardDefinition_InputSlot.resx">
+      <DependentUpon>FormYardDefinition_InputSlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MDIForm.resx">
+      <DependentUpon>MDIForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -198,6 +454,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-checkmark-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

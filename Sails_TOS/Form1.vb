@@ -17,4 +17,9 @@
         Dim frm As New FormTruckCode
         frm.Show()
     End Sub
+
+    Private Sub btn_yard_Click(sender As Object, e As EventArgs) Handles btn_yard.Click
+        Dim frm As New FormYardDefinition
+        frm.Show()
+    End Sub
 End Class

@@ -25,6 +25,7 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btn_machine_type = New System.Windows.Forms.Button()
         Me.btn_truck_code = New System.Windows.Forms.Button()
+        Me.btn_yard = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -55,11 +56,21 @@ Partial Class Form1
         Me.btn_truck_code.Text = "Truck Code"
         Me.btn_truck_code.UseVisualStyleBackColor = True
         '
+        'btn_yard
+        '
+        Me.btn_yard.Location = New System.Drawing.Point(12, 70)
+        Me.btn_yard.Name = "btn_yard"
+        Me.btn_yard.Size = New System.Drawing.Size(244, 23)
+        Me.btn_yard.TabIndex = 4
+        Me.btn_yard.Text = "Yard Definition"
+        Me.btn_yard.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(268, 77)
+        Me.ClientSize = New System.Drawing.Size(268, 103)
+        Me.Controls.Add(Me.btn_yard)
         Me.Controls.Add(Me.btn_truck_code)
         Me.Controls.Add(Me.btn_machine_type)
         Me.Controls.Add(Me.Button1)
@@ -76,4 +87,5 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents btn_machine_type As Button
     Friend WithEvents btn_truck_code As Button
+    Friend WithEvents btn_yard As Button
 End Class

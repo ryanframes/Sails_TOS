@@ -42,6 +42,26 @@ Sails_TOS
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Sails_TOS.My.Resources.Resources.Export">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Export1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.Export2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.icons8_checkmark_16">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Sails_TOS.My.Resources.Resources.Save_2">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
