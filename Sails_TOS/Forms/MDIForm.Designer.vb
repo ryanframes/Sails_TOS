@@ -37,8 +37,9 @@ Partial Class MDIForm
         Me.FindContainerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InquiryContainerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HRMachineDriverToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tabStrip1 = New DevComponents.DotNetBar.TabStrip()
         Me.AuthentificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tabStrip1 = New DevComponents.DotNetBar.TabStrip()
+        Me.VMTYardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,7 +61,7 @@ Partial Class MDIForm
         '
         'MenuToolStripMenuItem
         '
-        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MachineSpecToolStripMenuItem, Me.DamageCodeToolStripMenuItem, Me.InboundDataToolStripMenuItem, Me.MachineSpecToolStripMenuItem1, Me.MachineTypeToolStripMenuItem, Me.TruckCodeToolStripMenuItem, Me.YardDefinitionToolStripMenuItem, Me.QuayLaneToolStripMenuItem, Me.FindContainerToolStripMenuItem, Me.InquiryContainerToolStripMenuItem, Me.HRMachineDriverToolStripMenuItem, Me.AuthentificationToolStripMenuItem})
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MachineSpecToolStripMenuItem, Me.DamageCodeToolStripMenuItem, Me.InboundDataToolStripMenuItem, Me.MachineSpecToolStripMenuItem1, Me.MachineTypeToolStripMenuItem, Me.TruckCodeToolStripMenuItem, Me.YardDefinitionToolStripMenuItem, Me.QuayLaneToolStripMenuItem, Me.FindContainerToolStripMenuItem, Me.InquiryContainerToolStripMenuItem, Me.HRMachineDriverToolStripMenuItem, Me.AuthentificationToolStripMenuItem, Me.VMTYardToolStripMenuItem})
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
         Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.MenuToolStripMenuItem.Text = "Menu"
@@ -131,6 +132,12 @@ Partial Class MDIForm
         Me.HRMachineDriverToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.HRMachineDriverToolStripMenuItem.Text = "HR Machine Driver"
         '
+        'AuthentificationToolStripMenuItem
+        '
+        Me.AuthentificationToolStripMenuItem.Name = "AuthentificationToolStripMenuItem"
+        Me.AuthentificationToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AuthentificationToolStripMenuItem.Text = "Authentification"
+        '
         'tabStrip1
         '
         Me.tabStrip1.AutoSelectAttachedControl = True
@@ -153,11 +160,11 @@ Partial Class MDIForm
         Me.tabStrip1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox
         Me.tabStrip1.Text = "tabStrip1"
         '
-        'AuthentificationToolStripMenuItem
+        'VMTYardToolStripMenuItem
         '
-        Me.AuthentificationToolStripMenuItem.Name = "AuthentificationToolStripMenuItem"
-        Me.AuthentificationToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.AuthentificationToolStripMenuItem.Text = "Authentification"
+        Me.VMTYardToolStripMenuItem.Name = "VMTYardToolStripMenuItem"
+        Me.VMTYardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.VMTYardToolStripMenuItem.Text = "VMT Yard"
         '
         'MDIForm
         '
@@ -195,4 +202,5 @@ Partial Class MDIForm
     Friend WithEvents HRMachineDriverToolStripMenuItem As ToolStripMenuItem
     Private WithEvents tabStrip1 As DevComponents.DotNetBar.TabStrip
     Friend WithEvents AuthentificationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VMTYardToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -84,4 +84,11 @@ Public Class MDIForm
         Dim frm As New FormAuthentification
         frm.ShowDialog()
     End Sub
+
+    Private Sub VMTYardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VMTYardToolStripMenuItem.Click
+        Dim frm As New FormVMT
+        frm.MdiParent = Me
+        frm.Show()
+        Me.Refresh()
+    End Sub
 End Class

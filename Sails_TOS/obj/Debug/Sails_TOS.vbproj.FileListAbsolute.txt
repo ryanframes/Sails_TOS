@@ -148,3 +148,34 @@ H:\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryHold.resourc
 H:\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormAuthentification.resources
 H:\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormITV.resources
 H:\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMT.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DocumentFormat.OpenXml.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ExcelNumberFormat.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\FastMember.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.dll
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.pdb
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DocumentFormat.OpenXml.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ExcelNumberFormat.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.pdb
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.xml
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormAuthentification.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiry.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryDateTime.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryHold.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryJobHistory.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputGrade.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputPart.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputType.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormFindContainer.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormHRMchDriver.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormInboundData_UploadBaplie.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormITV.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormJobController.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormJobControl_Input.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineSpec.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineSpec_Input.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormQuayLane.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMT.resources
+E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.MDIForm.resources
