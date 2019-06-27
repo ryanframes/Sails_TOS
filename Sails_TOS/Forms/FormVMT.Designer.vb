@@ -30,8 +30,8 @@ Partial Class FormVMT
         Me.pnlTop = New DevComponents.DotNetBar.PanelEx()
         Me.lbl_machine = New System.Windows.Forms.Label()
         Me.pnl_left = New DevComponents.DotNetBar.PanelEx()
-        Me.pnl_listing = New DevComponents.DotNetBar.PanelEx()
-        Me.pnl_list_job = New DevComponents.DotNetBar.PanelEx()
+        Me.pnl_job_list = New DevComponents.DotNetBar.PanelEx()
+        Me.pnl_job = New DevComponents.DotNetBar.PanelEx()
         Me.lbl_block_cell_slot = New System.Windows.Forms.Label()
         Me.lbl_cont_data = New System.Windows.Forms.Label()
         Me.lbl_job = New System.Windows.Forms.Label()
@@ -49,16 +49,15 @@ Partial Class FormVMT
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.pnl_block_slot = New System.Windows.Forms.Panel()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btn_slot_prev = New System.Windows.Forms.Button()
         Me.txt_slot = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btn_slot_next = New System.Windows.Forms.Button()
+        Me.btn_block_prev = New System.Windows.Forms.Button()
         Me.txt_block = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_block_next = New System.Windows.Forms.Button()
         Me.pnlTop.SuspendLayout()
         Me.pnl_left.SuspendLayout()
-        Me.pnl_listing.SuspendLayout()
-        Me.pnl_list_job.SuspendLayout()
+        Me.pnl_job.SuspendLayout()
         Me.pnl_job_block.SuspendLayout()
         Me.pnl_right.SuspendLayout()
         Me.pnl_action.SuspendLayout()
@@ -137,7 +136,8 @@ Partial Class FormVMT
         Me.pnl_left.AutoScroll = True
         Me.pnl_left.CanvasColor = System.Drawing.SystemColors.Control
         Me.pnl_left.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.pnl_left.Controls.Add(Me.pnl_listing)
+        Me.pnl_left.Controls.Add(Me.pnl_job_list)
+        Me.pnl_left.Controls.Add(Me.pnl_job)
         Me.pnl_left.Controls.Add(Me.pnl_job_block)
         Me.pnl_left.DisabledBackColor = System.Drawing.Color.Empty
         Me.pnl_left.Dock = System.Windows.Forms.DockStyle.Left
@@ -152,46 +152,45 @@ Partial Class FormVMT
         Me.pnl_left.Style.GradientAngle = 90
         Me.pnl_left.TabIndex = 72
         '
-        'pnl_listing
+        'pnl_job_list
         '
-        Me.pnl_listing.AutoScroll = True
-        Me.pnl_listing.CanvasColor = System.Drawing.SystemColors.Control
-        Me.pnl_listing.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.pnl_listing.Controls.Add(Me.pnl_list_job)
-        Me.pnl_listing.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnl_listing.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnl_listing.Location = New System.Drawing.Point(0, 66)
-        Me.pnl_listing.Name = "pnl_listing"
-        Me.pnl_listing.Padding = New System.Windows.Forms.Padding(4)
-        Me.pnl_listing.Size = New System.Drawing.Size(269, 327)
-        Me.pnl_listing.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.pnl_listing.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.pnl_listing.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.pnl_listing.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.pnl_listing.Style.GradientAngle = 90
-        Me.pnl_listing.TabIndex = 42
+        Me.pnl_job_list.AutoScroll = True
+        Me.pnl_job_list.CanvasColor = System.Drawing.SystemColors.Control
+        Me.pnl_job_list.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnl_job_list.DisabledBackColor = System.Drawing.Color.Empty
+        Me.pnl_job_list.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnl_job_list.Location = New System.Drawing.Point(0, 120)
+        Me.pnl_job_list.Name = "pnl_job_list"
+        Me.pnl_job_list.Padding = New System.Windows.Forms.Padding(4)
+        Me.pnl_job_list.Size = New System.Drawing.Size(269, 273)
+        Me.pnl_job_list.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.pnl_job_list.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.pnl_job_list.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.pnl_job_list.Style.GradientAngle = 90
+        Me.pnl_job_list.TabIndex = 42
         '
-        'pnl_list_job
+        'pnl_job
         '
-        Me.pnl_list_job.CanvasColor = System.Drawing.SystemColors.Control
-        Me.pnl_list_job.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.pnl_list_job.Controls.Add(Me.lbl_block_cell_slot)
-        Me.pnl_list_job.Controls.Add(Me.lbl_cont_data)
-        Me.pnl_list_job.Controls.Add(Me.lbl_job)
-        Me.pnl_list_job.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnl_list_job.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnl_list_job.Location = New System.Drawing.Point(4, 4)
-        Me.pnl_list_job.Name = "pnl_list_job"
-        Me.pnl_list_job.Padding = New System.Windows.Forms.Padding(5)
-        Me.pnl_list_job.Size = New System.Drawing.Size(261, 56)
-        Me.pnl_list_job.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.pnl_list_job.Style.BackColor1.Color = System.Drawing.SystemColors.ButtonFace
-        Me.pnl_list_job.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.pnl_list_job.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.pnl_list_job.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.pnl_list_job.Style.GradientAngle = 90
-        Me.pnl_list_job.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.pnl_list_job.TabIndex = 7
+        Me.pnl_job.CanvasColor = System.Drawing.SystemColors.Control
+        Me.pnl_job.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnl_job.Controls.Add(Me.lbl_block_cell_slot)
+        Me.pnl_job.Controls.Add(Me.lbl_cont_data)
+        Me.pnl_job.Controls.Add(Me.lbl_job)
+        Me.pnl_job.DisabledBackColor = System.Drawing.Color.Empty
+        Me.pnl_job.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_job.Location = New System.Drawing.Point(0, 66)
+        Me.pnl_job.Name = "pnl_job"
+        Me.pnl_job.Padding = New System.Windows.Forms.Padding(5)
+        Me.pnl_job.Size = New System.Drawing.Size(269, 54)
+        Me.pnl_job.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.pnl_job.Style.BackColor1.Color = System.Drawing.SystemColors.ButtonFace
+        Me.pnl_job.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.pnl_job.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.pnl_job.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.pnl_job.Style.GradientAngle = 90
+        Me.pnl_job.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.pnl_job.TabIndex = 7
+        Me.pnl_job.Visible = False
         '
         'lbl_block_cell_slot
         '
@@ -202,7 +201,7 @@ Partial Class FormVMT
         Me.lbl_block_cell_slot.ForeColor = System.Drawing.Color.Black
         Me.lbl_block_cell_slot.Location = New System.Drawing.Point(38, 28)
         Me.lbl_block_cell_slot.Name = "lbl_block_cell_slot"
-        Me.lbl_block_cell_slot.Size = New System.Drawing.Size(218, 23)
+        Me.lbl_block_cell_slot.Size = New System.Drawing.Size(226, 23)
         Me.lbl_block_cell_slot.TabIndex = 72
         Me.lbl_block_cell_slot.Text = "Job"
         Me.lbl_block_cell_slot.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -216,7 +215,7 @@ Partial Class FormVMT
         Me.lbl_cont_data.ForeColor = System.Drawing.Color.Black
         Me.lbl_cont_data.Location = New System.Drawing.Point(38, 5)
         Me.lbl_cont_data.Name = "lbl_cont_data"
-        Me.lbl_cont_data.Size = New System.Drawing.Size(218, 23)
+        Me.lbl_cont_data.Size = New System.Drawing.Size(226, 23)
         Me.lbl_cont_data.TabIndex = 71
         Me.lbl_cont_data.Text = "BARY02111112 2200 G I MRBM IDJKT"
         Me.lbl_cont_data.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -230,7 +229,7 @@ Partial Class FormVMT
         Me.lbl_job.ForeColor = System.Drawing.Color.Black
         Me.lbl_job.Location = New System.Drawing.Point(5, 5)
         Me.lbl_job.Name = "lbl_job"
-        Me.lbl_job.Size = New System.Drawing.Size(33, 46)
+        Me.lbl_job.Size = New System.Drawing.Size(33, 44)
         Me.lbl_job.TabIndex = 70
         Me.lbl_job.Text = "DS"
         Me.lbl_job.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -242,6 +241,7 @@ Partial Class FormVMT
         Me.pnl_job_block.Controls.Add(Me.cmb_job)
         Me.pnl_job_block.Controls.Add(Me.Label1)
         Me.pnl_job_block.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_job_block.ForeColor = System.Drawing.Color.Black
         Me.pnl_job_block.Location = New System.Drawing.Point(0, 0)
         Me.pnl_job_block.Name = "pnl_job_block"
         Me.pnl_job_block.Size = New System.Drawing.Size(269, 66)
@@ -414,7 +414,9 @@ Partial Class FormVMT
         'TextBox1
         '
         Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.BackColor = System.Drawing.Color.White
         Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.ForeColor = System.Drawing.Color.Black
         Me.TextBox1.Location = New System.Drawing.Point(394, 6)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(142, 25)
@@ -450,93 +452,100 @@ Partial Class FormVMT
         '
         'pnl_block_slot
         '
-        Me.pnl_block_slot.Controls.Add(Me.Button4)
+        Me.pnl_block_slot.Controls.Add(Me.btn_slot_prev)
         Me.pnl_block_slot.Controls.Add(Me.txt_slot)
-        Me.pnl_block_slot.Controls.Add(Me.Button3)
-        Me.pnl_block_slot.Controls.Add(Me.Button2)
+        Me.pnl_block_slot.Controls.Add(Me.btn_slot_next)
+        Me.pnl_block_slot.Controls.Add(Me.btn_block_prev)
         Me.pnl_block_slot.Controls.Add(Me.txt_block)
-        Me.pnl_block_slot.Controls.Add(Me.Button1)
+        Me.pnl_block_slot.Controls.Add(Me.btn_block_next)
         Me.pnl_block_slot.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_block_slot.ForeColor = System.Drawing.Color.Black
         Me.pnl_block_slot.Location = New System.Drawing.Point(0, 0)
         Me.pnl_block_slot.Name = "pnl_block_slot"
         Me.pnl_block_slot.Size = New System.Drawing.Size(576, 63)
         Me.pnl_block_slot.TabIndex = 2
         '
-        'Button4
+        'btn_slot_prev
         '
-        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.ForeColor = System.Drawing.Color.Black
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(336, 6)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(52, 50)
-        Me.Button4.TabIndex = 14
-        Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.btn_slot_prev.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_slot_prev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_slot_prev.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_slot_prev.ForeColor = System.Drawing.Color.Black
+        Me.btn_slot_prev.Image = CType(resources.GetObject("btn_slot_prev.Image"), System.Drawing.Image)
+        Me.btn_slot_prev.Location = New System.Drawing.Point(336, 6)
+        Me.btn_slot_prev.Name = "btn_slot_prev"
+        Me.btn_slot_prev.Size = New System.Drawing.Size(52, 50)
+        Me.btn_slot_prev.TabIndex = 14
+        Me.btn_slot_prev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_slot_prev.UseVisualStyleBackColor = False
         '
         'txt_slot
         '
+        Me.txt_slot.BackColor = System.Drawing.Color.White
         Me.txt_slot.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_slot.ForeColor = System.Drawing.Color.Black
         Me.txt_slot.Location = New System.Drawing.Point(258, 6)
         Me.txt_slot.Name = "txt_slot"
+        Me.txt_slot.ReadOnly = True
         Me.txt_slot.Size = New System.Drawing.Size(72, 50)
         Me.txt_slot.TabIndex = 13
         Me.txt_slot.Text = "16"
         Me.txt_slot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button3
+        'btn_slot_next
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.ForeColor = System.Drawing.Color.Black
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(200, 6)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(52, 50)
-        Me.Button3.TabIndex = 12
-        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btn_slot_next.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_slot_next.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_slot_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_slot_next.ForeColor = System.Drawing.Color.Black
+        Me.btn_slot_next.Image = CType(resources.GetObject("btn_slot_next.Image"), System.Drawing.Image)
+        Me.btn_slot_next.Location = New System.Drawing.Point(200, 6)
+        Me.btn_slot_next.Name = "btn_slot_next"
+        Me.btn_slot_next.Size = New System.Drawing.Size(52, 50)
+        Me.btn_slot_next.TabIndex = 12
+        Me.btn_slot_next.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_slot_next.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btn_block_prev
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.Color.Black
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(142, 6)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(52, 50)
-        Me.Button2.TabIndex = 11
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btn_block_prev.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_block_prev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_block_prev.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_block_prev.ForeColor = System.Drawing.Color.Black
+        Me.btn_block_prev.Image = CType(resources.GetObject("btn_block_prev.Image"), System.Drawing.Image)
+        Me.btn_block_prev.Location = New System.Drawing.Point(142, 6)
+        Me.btn_block_prev.Name = "btn_block_prev"
+        Me.btn_block_prev.Size = New System.Drawing.Size(52, 50)
+        Me.btn_block_prev.TabIndex = 11
+        Me.btn_block_prev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_block_prev.UseVisualStyleBackColor = False
         '
         'txt_block
         '
+        Me.txt_block.BackColor = System.Drawing.Color.White
         Me.txt_block.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_block.ForeColor = System.Drawing.Color.Black
         Me.txt_block.Location = New System.Drawing.Point(64, 6)
         Me.txt_block.Name = "txt_block"
+        Me.txt_block.ReadOnly = True
         Me.txt_block.Size = New System.Drawing.Size(72, 50)
         Me.txt_block.TabIndex = 10
         Me.txt_block.Text = "2I"
         Me.txt_block.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button1
+        'btn_block_next
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.Black
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(6, 6)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(52, 50)
-        Me.Button1.TabIndex = 9
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btn_block_next.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_block_next.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_block_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_block_next.ForeColor = System.Drawing.Color.Black
+        Me.btn_block_next.Image = CType(resources.GetObject("btn_block_next.Image"), System.Drawing.Image)
+        Me.btn_block_next.Location = New System.Drawing.Point(6, 6)
+        Me.btn_block_next.Name = "btn_block_next"
+        Me.btn_block_next.Size = New System.Drawing.Size(52, 50)
+        Me.btn_block_next.TabIndex = 9
+        Me.btn_block_next.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_block_next.UseVisualStyleBackColor = False
         '
         'FormVMT
         '
@@ -553,8 +562,7 @@ Partial Class FormVMT
         Me.Text = "VMT"
         Me.pnlTop.ResumeLayout(False)
         Me.pnl_left.ResumeLayout(False)
-        Me.pnl_listing.ResumeLayout(False)
-        Me.pnl_list_job.ResumeLayout(False)
+        Me.pnl_job.ResumeLayout(False)
         Me.pnl_job_block.ResumeLayout(False)
         Me.pnl_right.ResumeLayout(False)
         Me.pnl_action.ResumeLayout(False)
@@ -579,20 +587,20 @@ Partial Class FormVMT
     Private WithEvents cmb_block As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents Label2 As Label
     Private WithEvents cmb_job As DevComponents.DotNetBar.Controls.ComboBoxEx
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btn_block_next As Button
+    Friend WithEvents btn_block_prev As Button
     Friend WithEvents txt_block As TextBox
-    Friend WithEvents Button4 As Button
+    Friend WithEvents btn_slot_prev As Button
     Friend WithEvents txt_slot As TextBox
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btn_slot_next As Button
     Friend WithEvents pnl_visual_block_slot As DevComponents.DotNetBar.PanelEx
     Friend WithEvents pnl_action As DevComponents.DotNetBar.PanelEx
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents pnl_listing As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents pnl_list_job As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents pnl_job_list As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents pnl_job As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lbl_job As Label
     Friend WithEvents lbl_block_cell_slot As Label
     Friend WithEvents lbl_cont_data As Label

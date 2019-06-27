@@ -231,7 +231,7 @@
         vSFfWMYz+uhiDb5exBsihyaOsRBnXt4/yCS84d+Z4BcGLajUSe9SaQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_slot_prev.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         xAAADsQBlSsOGwAAAAd0SU1FB+MGGQ8MLRxjen0AAAAHdEVYdEF1dGhvcgCprsxIAAAADHRFWHREZXNj
@@ -245,7 +245,7 @@
         +i6XDCPJMJIMI8kwkgwjyTCSDCPJME6R3gFooOgDp181kwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_slot_next.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         xAAADsQBlSsOGwAAAAd0SU1FB+MGGQ8ME90CZ9YAAAAHdEVYdEF1dGhvcgCprsxIAAAADHRFWHREZXNj
@@ -259,7 +259,7 @@
         SDKMJMNIMowkw0gyjCTDSDKMU6QOsDPoA4Mvo70AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_block_prev.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         xAAADsQBlSsOGwAAAAd0SU1FB+MGGQ8MLRxjen0AAAAHdEVYdEF1dGhvcgCprsxIAAAADHRFWHREZXNj
@@ -273,7 +273,7 @@
         +i6XDCPJMJIMI8kwkgwjyTCSDCPJME6R3gFooOgDp181kwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_block_next.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         xAAADsQBlSsOGwAAAAd0SU1FB+MGGQ8ME90CZ9YAAAAHdEVYdEF1dGhvcgCprsxIAAAADHRFWHREZXNj

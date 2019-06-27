@@ -262,6 +262,18 @@
     <Compile Include="Forms\FormVMT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormVMTBlock.Designer.vb">
+      <DependentUpon>FormVMTBlock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormVMTBlock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormVMTSlot.Designer.vb">
+      <DependentUpon>FormVMTSlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormVMTSlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormYardDefinition.Designer.vb">
       <DependentUpon>FormYardDefinition.vb</DependentUpon>
     </Compile>
@@ -301,6 +313,7 @@
     <Compile Include="Modules\Mdl_trucde.vb" />
     <Compile Include="Modules\Mdl_vessched.vb" />
     <Compile Include="Modules\Mdl_vmtauth.vb" />
+    <Compile Include="Modules\Mdl_vmtyrd.vb" />
     <Compile Include="Modules\Mdl_yrddef.vb" />
     <Compile Include="Modules\TextBoxAutoComplete.vb">
       <SubType>Component</SubType>
@@ -404,6 +417,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormVMT.resx">
       <DependentUpon>FormVMT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormVMTBlock.resx">
+      <DependentUpon>FormVMTBlock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormVMTSlot.resx">
+      <DependentUpon>FormVMTSlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYardDefinition.resx">
       <DependentUpon>FormYardDefinition.vb</DependentUpon>
