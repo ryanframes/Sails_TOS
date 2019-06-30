@@ -22,6 +22,11 @@ Sails_TOS
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:Sails_TOS.My.Resources.Resources._6__No_Work_Area">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Sails_TOS.My.Resources.Resources.Add">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -58,6 +63,11 @@ Sails_TOS
 </summary>
 </member>
 <member name="P:Sails_TOS.My.Resources.Resources.icons8_checkmark_16">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Sails_TOS.My.Resources.Resources.remove_icon_20">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

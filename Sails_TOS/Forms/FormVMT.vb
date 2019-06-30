@@ -4,6 +4,7 @@ Public Class FormVMT
     Private _pubUser As String
     Private _pubMch As String
     Private _popUp As String
+    'Private dtBlock As DataTable
 
     Public Sub New()
 
@@ -14,6 +15,17 @@ Public Class FormVMT
 
 
     End Sub
+
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        'this is magic code that has an enormous positive effect on reducing flickering.
+        'don't remove this.
+        'found this nugget here: http://www.vbmigration.com/detknowledgebase.aspx?Id=692
+        Get
+            Dim params As CreateParams = MyBase.CreateParams
+            params.ExStyle = params.ExStyle Or &H2000000
+            Return params
+        End Get
+    End Property
 
     Private Sub addJobEffect(ByVal parentPnl As PanelEx)
         'highlight panel list
@@ -46,9 +58,321 @@ Public Class FormVMT
         End Set
     End Property
 
+    Private Sub refresh_visualisasi()
+        Dim crs As Cursor = Cursor.Current
+        Cursor.Current = Cursors.WaitCursor
+        show_list_row_tier()
+        Cursor.Current = crs
+    End Sub
+
+    Sub set_block(ByVal txt As String, ByVal id As String)
+        If txt = "All" Then 'jika all maka jadikan ke block selanjutnya (sumber data dari combobox)
+            txt_block.Tag = 0
+            set_block_next() 'set block next akan memanggil set_block lagi oleh krn itu setelah set next kita exit
+            Return
+        Else
+            txt_block.Text = txt
+            txt_block.Tag = id
+            'reset slot
+            txt_slot.Text = ""
+            txt_slot.Tag = 0
+            set_slot_next()
+        End If
+    End Sub
+
+    Private Sub set_slot(ByVal txt As String, ByVal id As String)
+        txt_slot.Text = txt
+        txt_slot.Tag = id
+        refresh_visualisasi()
+    End Sub
+
+    Private Sub set_block_next()
+        Dim idBlock As Integer
+        If IsNothing(txt_block.Tag) Then
+            idBlock = 0
+        ElseIf IsNumeric(txt_block.Tag) = False Then
+            idBlock = 0
+        Else
+            idBlock = txt_block.Tag
+        End If
+        Dim dt As DataTable = fc_vmtyrd_getblocklist(pubApiAddress)
+        dt.DefaultView.Sort = "ID_BLOCK ASC"
+        For i As Integer = 0 To dt.Rows.Count - 1
+            If dt.Rows(i)("ID_BLOCK") > idBlock Then
+                set_block(dt.Rows(i)("BLOCK_NAME"), dt.Rows(i)("ID_BLOCK"))
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub set_block_prev()
+        Dim idBlock As Integer
+        If IsNothing(txt_block.Tag) Then
+            idBlock = 0
+        ElseIf IsNumeric(txt_block.Tag) = False Then
+            idBlock = 0
+        Else
+            idBlock = txt_block.Tag
+        End If
+        Dim dt As DataTable = fc_vmtyrd_getblocklist(pubApiAddress)
+        dt.DefaultView.Sort = "ID_BLOCK DESC"
+        For i As Integer = 0 To dt.Rows.Count - 1
+            If dt.Rows(i)("ID_BLOCK") < idBlock Then
+                set_block(dt.Rows(i)("BLOCK_NAME"), dt.Rows(i)("ID_BLOCK"))
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub set_slot_next()
+        Dim idBlock As Integer
+        If IsNothing(txt_block.Tag) Then
+            idBlock = 0
+        ElseIf IsNumeric(txt_block.Tag) = False Then
+            idBlock = 0
+        Else
+            idBlock = txt_block.Tag
+        End If
+
+        Dim idSlot As Integer
+        If IsNothing(txt_slot.Tag) Then
+            idSlot = 0
+        ElseIf IsNumeric(txt_slot.Tag) = False Then
+            idSlot = 0
+        Else
+            idSlot = txt_slot.Tag
+        End If
+
+        Dim dt As DataTable = fc_vmtyrd_getslotlist(pubApiAddress, "id_block=" & idBlock)
+        dt.DefaultView.Sort = "ID_STACK ASC"
+        For i As Integer = 0 To dt.Rows.Count - 1
+            If dt.Rows(i)("ID_STACK") > idSlot Then
+                set_slot(dt.Rows(i)("20_STACKNAME"), dt.Rows(i)("ID_STACK"))
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub set_slot_prev()
+        Dim idBlock As Integer
+        If IsNothing(txt_block.Tag) Then
+            idBlock = 0
+        ElseIf IsNumeric(txt_block.Tag) = False Then
+            idBlock = 0
+        Else
+            idBlock = txt_block.Tag
+        End If
+
+        Dim idSlot As Integer
+        If IsNothing(txt_slot.Tag) Then
+            idSlot = 0
+        ElseIf IsNumeric(txt_slot.Tag) = False Then
+            idSlot = 0
+        Else
+            idSlot = txt_slot.Tag
+        End If
+
+        Dim dt As DataTable = fc_vmtyrd_getslotlist(pubApiAddress, "id_block=" & idBlock)
+        dt.DefaultView.Sort = "ID_STACK DESC"
+        For i As Integer = 0 To dt.Rows.Count - 1
+            If dt.Rows(i)("ID_STACK") < idSlot Then
+                set_slot(dt.Rows(i)("BLOCK_NAME"), dt.Rows(i)("ID_BLOCK"))
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub lbl_cell_MouseEnter(sender As Object, e As EventArgs)
+        CType(sender, Label).BackColor = Color.FromArgb(255, 255, 192)
+        CType(CType(sender, Label).Parent, Panel).BackColor = Color.FromArgb(255, 255, 192)
+        CType(CType(sender, Label).Parent.Parent, Panel).BackColor = Color.FromArgb(255, 255, 192)
+    End Sub
+
+    Private Sub lbl_cell_MouseLeave(sender As Object, e As EventArgs)
+        CType(sender, Label).BackColor = Color.Transparent
+        CType(CType(sender, Label).Parent, Panel).BackColor = Color.Transparent
+        CType(CType(sender, Label).Parent.Parent, Panel).BackColor = SystemColors.HighlightText
+    End Sub
+
+    Private Sub pnl_cell_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub show_list_row_tier()
+        'tampilkan list row dan tier
+        'hide panels for better visual when loading data
+        pnl_visual_block_slot.Visible = False
+        'clear list tier
+        pnl_tier.Controls.Clear()
+        pnl_row.Controls.Clear()
+        Dim idBlock As Integer
+        If IsNothing(txt_block.Tag) Then
+            idBlock = 0
+        ElseIf IsNumeric(txt_block.Tag) = False Then
+            idBlock = 0
+        Else
+            idBlock = txt_block.Tag
+        End If
+        Dim dt As DataTable
+        Dim maxTier As Long, maxRow As Long, avbTier As Long
+        Dim lbl As Label
+        Dim pos_x As Integer = 1, pos_y As Integer = 1
+        Dim i As Long
+#Region "Tampil List tier"
+        'get tier
+        dt = fc_vmtyrd_gettierlist(pubApiAddress, "id_block=" & idBlock)
+        If dt.Rows.Count > 0 Then
+            maxTier = dt.Rows(0)("MAX_TIER")
+            avbTier = dt.Rows(0)("AVB_TIER")
+            i = maxTier
+            Do While i > 0
+                lbl = New Label
+                lbl.TextAlign = ContentAlignment.MiddleCenter
+                lbl.Name = "lbl_tier" & i
+                lbl.AutoSize = True
+                lbl.Text = i
+                lbl.MinimumSize = New Size(15, pnl_cell.Height)
+                lbl.Location = New Point(pos_x, pos_y)
+                pos_y = pos_y + pnl_cell.Height + 3 '(3=jarak antara pnl_cell)
+                pnl_tier.Controls.Add(lbl)
+                lbl.Visible = True
+                i = i - 1
+            Loop
+        End If
+#End Region
+
+#Region "Tampil List row"
+        pos_x = 2 : pos_y = 2 'reset pos x dan y
+        dt = fc_vmtyrd_getrowlist(pubApiAddress, "id_block=" & idBlock)
+        If dt.Rows.Count > 0 Then
+            maxRow = dt.Rows(0)("MAX_ROW")
+            i = maxRow
+            Do While i > 0
+                lbl = New Label
+                lbl.TextAlign = ContentAlignment.MiddleCenter
+                lbl.AutoSize = True
+                If dt.Rows(0)("ROW_DIRECTION") = "TB" Then
+                    lbl.Name = "lbl_row" & maxRow - (i - 1)
+                    lbl.Text = (maxRow - (i - 1)).ToString.PadLeft(2, "0")
+                ElseIf dt.Rows(0)("ROW_DIRECTION") = "BT" Then
+                    lbl.Name = "lbl_row" & i
+                    lbl.Text = i.ToString.PadLeft(2, "0")
+                End If
+                lbl.MinimumSize = New Size(pnl_cell.Width, 0)
+                lbl.Location = New Point(pos_x, pos_y)
+                pos_x = pos_x + lbl.MinimumSize.Width + pnl_row.Padding.Left
+                pnl_row.Controls.Add(lbl)
+                lbl.Visible = True
+                i = i - 1
+            Loop
+        End If
+        pnl_row.Location = New Point(pnl_row.Location.X, pnl_tier.Height + pnl_tier.Top)
+#End Region
+
+#Region "Tampil Cells"
+        'clear all cells
+        Do While pnl_visual_block_slot.Controls.Count > 6
+            For Each obj As Control In pnl_visual_block_slot.Controls
+                If obj.Name.Contains("pnl_cell") And obj.Name <> pnl_cell.Name Then
+                    pnl_visual_block_slot.Controls.Remove(obj)
+                End If
+            Next
+        Loop
+        Dim pnl As Panel
+        Dim pnlChld As Panel
+        For i = 1 To maxTier
+            For j As Long = 1 To maxRow
+                'create panel cell
+                pnl = New Panel
+                pnl.Size = pnl_cell.Size
+                pnl.BorderStyle = BorderStyle.FixedSingle
+                pnl.Left = pnl_tier.Left + pnl_tier.Width + 3
+                pnl.Name = "pnl_cell_tier" & i & "_row" & j
+                pnl.Visible = True
+                pnl.Top = pnl_tier.Top + (pnl_cell.Height * (i - 1)) + +(3 * (i - 1))
+                pnl.Left = pnl_row.Left + pnl_row.Controls(0).Left * 2 + ((pnl_cell.Width + 2) * (j - 1))
+                pnl_visual_block_slot.Controls.Add(pnl)
+
+                If maxTier - i >= avbTier Then
+                    'jika tier i lebih besar dari avb tier maka 
+                    pnl.Enabled = False
+                    pnl.BackgroundImage = My.Resources.remove_icon_20
+                    pnl.BackgroundImageLayout = ImageLayout.Tile
+                    Continue For
+                End If
+
+                'get cell info
+                dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock)
+
+                'add no cont
+                pnlChld = New Panel
+                pnlChld.Size = pnl_cell_no_cont.Size
+                pnlChld.Dock = DockStyle.Top
+                pnlChld.Name = "pnl_cell_cont_tier" & i & "_row" & j
+                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_cont_tier" & i & "_row" & j,
+                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = "1234", .MinimumSize = pnl_cell_no_cont.Size, .TextAlign = ContentAlignment.MiddleRight})
+                pnl.Controls.Add(pnlChld)
+
+                'add commodity
+                pnlChld = New Panel
+                pnlChld.Dock = DockStyle.Top
+                pnlChld.Size = pnl_cell_commodity.Size
+                pnlChld.Name = "pnl_cell_commodity_tier" & i & "_row" & j
+                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_commodity_tier" & i & "_row" & j,
+                                     .Dock = DockStyle.Left, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = "G", .MinimumSize = pnl_cell_no_cont.Size})
+                pnl.Controls.Add(pnlChld)
+
+                'add iso & class
+                pnlChld = New Panel
+                pnlChld.Dock = DockStyle.Top
+                pnlChld.Size = pnl_cell_iso_class.Size
+                pnlChld.Name = "pnl_cell_iso_tier" & i & "_row" & j
+                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_iso_tier" & i & "_row" & j,
+                                     .Dock = DockStyle.Fill, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = "2200"})
+                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_class_tier" & i & "_row" & j,
+                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = "I"})
+                pnl.Controls.Add(pnlChld)
+
+                'add event mouse enter and leave for every label in pnl cell
+                For Each obj As Control In pnl.Controls
+                    obj.BackColor = Color.Transparent
+                    If TypeOf obj Is Panel Then
+                        For Each ctrl As Control In obj.Controls
+                            If TypeOf ctrl Is Label Then
+                                AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
+                                AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
+                            End If
+                        Next
+                    End If
+                Next
+            Next
+        Next
+#End Region
+        pnl_visual_block_slot.Visible = True
+    End Sub
+
+    Private Sub show_data_cell()
+        Dim dt As DataTable = fc_vmtyrd_getcell(pubApiAddress, "")
+    End Sub
+
+    Private Sub lbl_listing_MouseEnter(sender As Object, e As EventArgs)
+        CType(sender, Label).BackColor = Color.FromArgb(255, 255, 192)
+        CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = Color.FromArgb(255, 255, 192)
+    End Sub
+
+    Private Sub lbl_listing_MouseLeave(sender As Object, e As EventArgs)
+        CType(sender, Label).BackColor = Color.Transparent
+        CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = SystemColors.ButtonFace
+    End Sub
+
     Private Sub show_list_job()
         Dim whereCondition As String
         whereCondition = IIf(cmb_job.Text = "All", "", "&job_code=" & cmb_job.Text)
+        whereCondition = whereCondition.Concat(whereCondition, "&block_code=" & IIf(cmb_block.Text = "All", "", cmb_block.Text))
         'unmark this before send to ILCS
         'whereCondition = whereCondition.Concat(whereCondition, "&mch_code=" & _pubMch)
         Dim dt As DataTable = fc_vmtyrd_getjob(pubApiAddress, whereCondition)
@@ -121,16 +445,6 @@ Public Class FormVMT
         fc_vmtauth_logout(Me)
     End Sub
 
-    Private Sub lbl_listing_MouseEnter(sender As Object, e As EventArgs)
-        CType(sender, Label).BackColor = Color.FromArgb(255, 255, 192)
-        CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = Color.FromArgb(255, 255, 192)
-    End Sub
-
-    Private Sub lbl_listing_MouseLeave(sender As Object, e As EventArgs)
-        CType(sender, Label).BackColor = Color.Transparent
-        CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = SystemColors.ButtonFace
-    End Sub
-
     Private Sub fill_combo()
         'kategori job
         cmb_job.Items.Clear()
@@ -142,6 +456,10 @@ Public Class FormVMT
         cmb_job.SelectedIndex = 0
         'block
         Dim dt As DataTable = fc_vmtyrd_getblocklist(pubApiAddress)
+        Dim dr As DataRow = dt.NewRow
+        dr("ID_BLOCK") = 0
+        dr("BLOCK_NAME") = "All"
+        dt.Rows.InsertAt(dr, 0)
         fill_combo_dt(dt, cmb_block, "ID_BLOCK", "BLOCK_NAME", False)
     End Sub
 
@@ -152,10 +470,6 @@ Public Class FormVMT
     Private Sub FormVMT_Load(sender As Object, e As EventArgs) Handles Me.Load
         getAPIConf()
         fill_combo()
-    End Sub
-
-    Private Sub txt_block_TextChanged(sender As Object, e As EventArgs) Handles txt_block.TextChanged
-
     End Sub
 
     Private Sub txt_block_Click(sender As Object, e As EventArgs) Handles txt_block.Click
@@ -172,8 +486,7 @@ Public Class FormVMT
 
     Sub popReturn(ByVal str As String())
         If _popUp = "block" Then
-            txt_block.Text = str(1)
-            txt_block.Tag = str(0)
+            set_block(str(1), str(0))
         ElseIf _popUp = "slot" Then
             txt_slot.Text = str(0)
         End If
@@ -200,26 +513,28 @@ Public Class FormVMT
 
     End Sub
 
-    Sub set_slot(ByVal id_block As String)
-        Dim dt As DataTable = fc_vmtyrd_getslotlist(pubApiAddress, "id_block=" & id_block)
-        If dt.Rows.Count = 0 Then
-            txt_slot.Text = ""
-        Else
-            txt_slot.Text = dt.Rows(0)(0)
-        End If
-    End Sub
-
-    Private Sub set_block(ByVal txt As String, ByVal id As String)
-        txt_block.Text = txt
-        txt_block.Tag = id
-    End Sub
-
     Private Sub cmb_block_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmb_block.SelectedValueChanged
         set_block(cmb_block.Text, IIf(IsNothing(cmb_block.SelectedValue), "", cmb_block.SelectedValue))
-        set_slot(IIf(IsNothing(cmb_block.SelectedValue), "", cmb_block.SelectedValue))
+        show_list_job()
     End Sub
 
-    Private Sub lbl_cont_data_Click(sender As Object, e As EventArgs) Handles lbl_cont_data.Click
+    Private Sub pnl_tier_Resize(sender As Object, e As EventArgs) Handles pnl_tier.Resize
+        'pnl_row.Location = New Point(pnl_row.Location.X, pnl_tier.PointToScreen(Point.Empty).Y + pnl_row.Height + 5)
+    End Sub
 
+    Private Sub txt_block_TextChanged(sender As Object, e As EventArgs) Handles txt_block.TextChanged
+
+    End Sub
+
+    Private Sub btn_block_next_Click(sender As Object, e As EventArgs) Handles btn_block_next.Click
+        set_block_next()
+    End Sub
+
+    Private Sub btn_block_prev_Click(sender As Object, e As EventArgs) Handles btn_block_prev.Click
+        set_block_prev()
+    End Sub
+
+    Private Sub btn_slot_next_Click(sender As Object, e As EventArgs) Handles btn_slot_next.Click
+        set_slot_next()
     End Sub
 End Class

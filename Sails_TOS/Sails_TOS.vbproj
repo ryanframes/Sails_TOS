@@ -486,5 +486,11 @@
   <ItemGroup>
     <None Include="Resources\icons8-checkmark-16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6. No Work Area.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove-icon_20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

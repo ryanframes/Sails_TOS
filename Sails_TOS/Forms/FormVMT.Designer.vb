@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormVMT
     Inherits DevComponents.DotNetBar.Metro.MetroForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,15 @@ Partial Class FormVMT
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormVMT))
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.btn_logout = New System.Windows.Forms.Button()
-        Me.lbl_user = New System.Windows.Forms.Label()
         Me.pnlTop = New DevComponents.DotNetBar.PanelEx()
         Me.lbl_machine = New System.Windows.Forms.Label()
+        Me.lbl_user = New System.Windows.Forms.Label()
         Me.pnl_left = New DevComponents.DotNetBar.PanelEx()
         Me.pnl_job_list = New DevComponents.DotNetBar.PanelEx()
         Me.pnl_job = New DevComponents.DotNetBar.PanelEx()
@@ -43,6 +43,18 @@ Partial Class FormVMT
         Me.ExpandableSplitter1 = New DevComponents.DotNetBar.ExpandableSplitter()
         Me.pnl_right = New DevComponents.DotNetBar.PanelEx()
         Me.pnl_visual_block_slot = New DevComponents.DotNetBar.PanelEx()
+        Me.pnl_row = New System.Windows.Forms.Panel()
+        Me.lbl_row = New System.Windows.Forms.Label()
+        Me.pnl_tier = New System.Windows.Forms.Panel()
+        Me.lbl_tier = New System.Windows.Forms.Label()
+        Me.pnl_cell = New DevComponents.DotNetBar.PanelEx()
+        Me.pnl_cell_no_cont = New System.Windows.Forms.Panel()
+        Me.lbl_cell_no_cont = New System.Windows.Forms.Label()
+        Me.pnl_cell_commodity = New System.Windows.Forms.Panel()
+        Me.lbl_cell_commodity = New System.Windows.Forms.Label()
+        Me.pnl_cell_iso_class = New System.Windows.Forms.Panel()
+        Me.lbl_cell_class = New System.Windows.Forms.Label()
+        Me.lbl_cell_iso = New System.Windows.Forms.Label()
         Me.pnl_action = New DevComponents.DotNetBar.PanelEx()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -55,11 +67,19 @@ Partial Class FormVMT
         Me.btn_block_prev = New System.Windows.Forms.Button()
         Me.txt_block = New System.Windows.Forms.TextBox()
         Me.btn_block_next = New System.Windows.Forms.Button()
+        Me.img = New System.Windows.Forms.ImageList(Me.components)
         Me.pnlTop.SuspendLayout()
         Me.pnl_left.SuspendLayout()
         Me.pnl_job.SuspendLayout()
         Me.pnl_job_block.SuspendLayout()
         Me.pnl_right.SuspendLayout()
+        Me.pnl_visual_block_slot.SuspendLayout()
+        Me.pnl_row.SuspendLayout()
+        Me.pnl_tier.SuspendLayout()
+        Me.pnl_cell.SuspendLayout()
+        Me.pnl_cell_no_cont.SuspendLayout()
+        Me.pnl_cell_commodity.SuspendLayout()
+        Me.pnl_cell_iso_class.SuspendLayout()
         Me.pnl_action.SuspendLayout()
         Me.pnl_block_slot.SuspendLayout()
         Me.SuspendLayout()
@@ -83,21 +103,6 @@ Partial Class FormVMT
         Me.btn_logout.Text = "Log Out"
         Me.btn_logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btn_logout.UseVisualStyleBackColor = False
-        '
-        'lbl_user
-        '
-        Me.lbl_user.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lbl_user.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lbl_user.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_user.ForeColor = System.Drawing.Color.Black
-        Me.lbl_user.Image = CType(resources.GetObject("lbl_user.Image"), System.Drawing.Image)
-        Me.lbl_user.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lbl_user.Location = New System.Drawing.Point(656, 7)
-        Me.lbl_user.Name = "lbl_user"
-        Me.lbl_user.Size = New System.Drawing.Size(116, 25)
-        Me.lbl_user.TabIndex = 67
-        Me.lbl_user.Text = "Username"
-        Me.lbl_user.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'pnlTop
         '
@@ -130,6 +135,21 @@ Partial Class FormVMT
         Me.lbl_machine.TabIndex = 68
         Me.lbl_machine.Text = "Machine : RGT 04"
         Me.lbl_machine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lbl_user
+        '
+        Me.lbl_user.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbl_user.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_user.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_user.ForeColor = System.Drawing.Color.Black
+        Me.lbl_user.Image = CType(resources.GetObject("lbl_user.Image"), System.Drawing.Image)
+        Me.lbl_user.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lbl_user.Location = New System.Drawing.Point(656, 7)
+        Me.lbl_user.Name = "lbl_user"
+        Me.lbl_user.Size = New System.Drawing.Size(116, 25)
+        Me.lbl_user.TabIndex = 67
+        Me.lbl_user.Text = "Username"
+        Me.lbl_user.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'pnl_left
         '
@@ -362,10 +382,14 @@ Partial Class FormVMT
         Me.pnl_visual_block_slot.AutoScroll = True
         Me.pnl_visual_block_slot.CanvasColor = System.Drawing.SystemColors.Control
         Me.pnl_visual_block_slot.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnl_visual_block_slot.Controls.Add(Me.pnl_row)
+        Me.pnl_visual_block_slot.Controls.Add(Me.pnl_tier)
+        Me.pnl_visual_block_slot.Controls.Add(Me.pnl_cell)
         Me.pnl_visual_block_slot.DisabledBackColor = System.Drawing.Color.Empty
         Me.pnl_visual_block_slot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnl_visual_block_slot.Location = New System.Drawing.Point(0, 103)
         Me.pnl_visual_block_slot.Name = "pnl_visual_block_slot"
+        Me.pnl_visual_block_slot.Padding = New System.Windows.Forms.Padding(10)
         Me.pnl_visual_block_slot.Size = New System.Drawing.Size(576, 290)
         Me.pnl_visual_block_slot.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.pnl_visual_block_slot.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
@@ -374,6 +398,172 @@ Partial Class FormVMT
         Me.pnl_visual_block_slot.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.pnl_visual_block_slot.Style.GradientAngle = 90
         Me.pnl_visual_block_slot.TabIndex = 11
+        '
+        'pnl_row
+        '
+        Me.pnl_row.AutoSize = True
+        Me.pnl_row.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnl_row.Controls.Add(Me.lbl_row)
+        Me.pnl_row.ForeColor = System.Drawing.Color.Black
+        Me.pnl_row.Location = New System.Drawing.Point(40, 76)
+        Me.pnl_row.MinimumSize = New System.Drawing.Size(67, 25)
+        Me.pnl_row.Name = "pnl_row"
+        Me.pnl_row.Padding = New System.Windows.Forms.Padding(2)
+        Me.pnl_row.Size = New System.Drawing.Size(71, 25)
+        Me.pnl_row.TabIndex = 22
+        '
+        'lbl_row
+        '
+        Me.lbl_row.AutoSize = True
+        Me.lbl_row.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_row.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_row.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_row.ForeColor = System.Drawing.Color.Black
+        Me.lbl_row.Location = New System.Drawing.Point(2, 2)
+        Me.lbl_row.MinimumSize = New System.Drawing.Size(64, 2)
+        Me.lbl_row.Name = "lbl_row"
+        Me.lbl_row.Size = New System.Drawing.Size(64, 17)
+        Me.lbl_row.TabIndex = 74
+        Me.lbl_row.Text = "04"
+        Me.lbl_row.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_row.Visible = False
+        '
+        'pnl_tier
+        '
+        Me.pnl_tier.AutoSize = True
+        Me.pnl_tier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnl_tier.Controls.Add(Me.lbl_tier)
+        Me.pnl_tier.ForeColor = System.Drawing.Color.Black
+        Me.pnl_tier.Location = New System.Drawing.Point(10, 10)
+        Me.pnl_tier.MinimumSize = New System.Drawing.Size(25, 60)
+        Me.pnl_tier.Name = "pnl_tier"
+        Me.pnl_tier.Padding = New System.Windows.Forms.Padding(1)
+        Me.pnl_tier.Size = New System.Drawing.Size(25, 62)
+        Me.pnl_tier.TabIndex = 18
+        '
+        'lbl_tier
+        '
+        Me.lbl_tier.AutoSize = True
+        Me.lbl_tier.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_tier.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_tier.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_tier.ForeColor = System.Drawing.Color.Black
+        Me.lbl_tier.Location = New System.Drawing.Point(1, 1)
+        Me.lbl_tier.MinimumSize = New System.Drawing.Size(15, 60)
+        Me.lbl_tier.Name = "lbl_tier"
+        Me.lbl_tier.Size = New System.Drawing.Size(15, 60)
+        Me.lbl_tier.TabIndex = 77
+        Me.lbl_tier.Text = "1"
+        Me.lbl_tier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_tier.Visible = False
+        '
+        'pnl_cell
+        '
+        Me.pnl_cell.CanvasColor = System.Drawing.SystemColors.Control
+        Me.pnl_cell.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnl_cell.Controls.Add(Me.pnl_cell_no_cont)
+        Me.pnl_cell.Controls.Add(Me.pnl_cell_commodity)
+        Me.pnl_cell.Controls.Add(Me.pnl_cell_iso_class)
+        Me.pnl_cell.DisabledBackColor = System.Drawing.Color.Empty
+        Me.pnl_cell.Location = New System.Drawing.Point(40, 10)
+        Me.pnl_cell.Name = "pnl_cell"
+        Me.pnl_cell.Padding = New System.Windows.Forms.Padding(3)
+        Me.pnl_cell.Size = New System.Drawing.Size(62, 60)
+        Me.pnl_cell.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.pnl_cell.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.pnl_cell.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.pnl_cell.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.pnl_cell.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.pnl_cell.Style.GradientAngle = 90
+        Me.pnl_cell.TabIndex = 14
+        Me.pnl_cell.Visible = False
+        '
+        'pnl_cell_no_cont
+        '
+        Me.pnl_cell_no_cont.Controls.Add(Me.lbl_cell_no_cont)
+        Me.pnl_cell_no_cont.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_cell_no_cont.ForeColor = System.Drawing.Color.Black
+        Me.pnl_cell_no_cont.Location = New System.Drawing.Point(3, 39)
+        Me.pnl_cell_no_cont.Name = "pnl_cell_no_cont"
+        Me.pnl_cell_no_cont.Size = New System.Drawing.Size(56, 18)
+        Me.pnl_cell_no_cont.TabIndex = 2
+        '
+        'lbl_cell_no_cont
+        '
+        Me.lbl_cell_no_cont.AutoSize = True
+        Me.lbl_cell_no_cont.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_cell_no_cont.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lbl_cell_no_cont.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_cell_no_cont.ForeColor = System.Drawing.Color.Black
+        Me.lbl_cell_no_cont.Location = New System.Drawing.Point(23, 0)
+        Me.lbl_cell_no_cont.Name = "lbl_cell_no_cont"
+        Me.lbl_cell_no_cont.Size = New System.Drawing.Size(33, 15)
+        Me.lbl_cell_no_cont.TabIndex = 71
+        Me.lbl_cell_no_cont.Text = "1234"
+        Me.lbl_cell_no_cont.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'pnl_cell_commodity
+        '
+        Me.pnl_cell_commodity.Controls.Add(Me.lbl_cell_commodity)
+        Me.pnl_cell_commodity.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_cell_commodity.ForeColor = System.Drawing.Color.Black
+        Me.pnl_cell_commodity.Location = New System.Drawing.Point(3, 21)
+        Me.pnl_cell_commodity.Name = "pnl_cell_commodity"
+        Me.pnl_cell_commodity.Size = New System.Drawing.Size(56, 18)
+        Me.pnl_cell_commodity.TabIndex = 1
+        '
+        'lbl_cell_commodity
+        '
+        Me.lbl_cell_commodity.AutoSize = True
+        Me.lbl_cell_commodity.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_cell_commodity.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lbl_cell_commodity.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_cell_commodity.ForeColor = System.Drawing.Color.Black
+        Me.lbl_cell_commodity.Location = New System.Drawing.Point(0, 0)
+        Me.lbl_cell_commodity.Name = "lbl_cell_commodity"
+        Me.lbl_cell_commodity.Size = New System.Drawing.Size(15, 15)
+        Me.lbl_cell_commodity.TabIndex = 70
+        Me.lbl_cell_commodity.Text = "G"
+        Me.lbl_cell_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'pnl_cell_iso_class
+        '
+        Me.pnl_cell_iso_class.Controls.Add(Me.lbl_cell_class)
+        Me.pnl_cell_iso_class.Controls.Add(Me.lbl_cell_iso)
+        Me.pnl_cell_iso_class.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnl_cell_iso_class.ForeColor = System.Drawing.Color.Black
+        Me.pnl_cell_iso_class.Location = New System.Drawing.Point(3, 3)
+        Me.pnl_cell_iso_class.Name = "pnl_cell_iso_class"
+        Me.pnl_cell_iso_class.Size = New System.Drawing.Size(56, 18)
+        Me.pnl_cell_iso_class.TabIndex = 0
+        '
+        'lbl_cell_class
+        '
+        Me.lbl_cell_class.AutoSize = True
+        Me.lbl_cell_class.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_cell_class.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lbl_cell_class.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_cell_class.ForeColor = System.Drawing.Color.Black
+        Me.lbl_cell_class.Location = New System.Drawing.Point(45, 0)
+        Me.lbl_cell_class.Name = "lbl_cell_class"
+        Me.lbl_cell_class.Size = New System.Drawing.Size(11, 15)
+        Me.lbl_cell_class.TabIndex = 71
+        Me.lbl_cell_class.Text = "I"
+        Me.lbl_cell_class.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lbl_cell_iso
+        '
+        Me.lbl_cell_iso.AutoSize = True
+        Me.lbl_cell_iso.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lbl_cell_iso.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lbl_cell_iso.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_cell_iso.ForeColor = System.Drawing.Color.Black
+        Me.lbl_cell_iso.Location = New System.Drawing.Point(0, 0)
+        Me.lbl_cell_iso.Name = "lbl_cell_iso"
+        Me.lbl_cell_iso.Size = New System.Drawing.Size(35, 15)
+        Me.lbl_cell_iso.TabIndex = 70
+        Me.lbl_cell_iso.Text = "2200"
+        Me.lbl_cell_iso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'pnl_action
         '
@@ -547,6 +737,12 @@ Partial Class FormVMT
         Me.btn_block_next.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btn_block_next.UseVisualStyleBackColor = False
         '
+        'img
+        '
+        Me.img.ImageStream = CType(resources.GetObject("img.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.img.TransparentColor = System.Drawing.Color.Transparent
+        Me.img.Images.SetKeyName(0, "6. No Work Area.png")
+        '
         'FormVMT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -565,6 +761,19 @@ Partial Class FormVMT
         Me.pnl_job.ResumeLayout(False)
         Me.pnl_job_block.ResumeLayout(False)
         Me.pnl_right.ResumeLayout(False)
+        Me.pnl_visual_block_slot.ResumeLayout(False)
+        Me.pnl_visual_block_slot.PerformLayout()
+        Me.pnl_row.ResumeLayout(False)
+        Me.pnl_row.PerformLayout()
+        Me.pnl_tier.ResumeLayout(False)
+        Me.pnl_tier.PerformLayout()
+        Me.pnl_cell.ResumeLayout(False)
+        Me.pnl_cell_no_cont.ResumeLayout(False)
+        Me.pnl_cell_no_cont.PerformLayout()
+        Me.pnl_cell_commodity.ResumeLayout(False)
+        Me.pnl_cell_commodity.PerformLayout()
+        Me.pnl_cell_iso_class.ResumeLayout(False)
+        Me.pnl_cell_iso_class.PerformLayout()
         Me.pnl_action.ResumeLayout(False)
         Me.pnl_action.PerformLayout()
         Me.pnl_block_slot.ResumeLayout(False)
@@ -593,7 +802,6 @@ Partial Class FormVMT
     Friend WithEvents btn_slot_prev As Button
     Friend WithEvents txt_slot As TextBox
     Friend WithEvents btn_slot_next As Button
-    Friend WithEvents pnl_visual_block_slot As DevComponents.DotNetBar.PanelEx
     Friend WithEvents pnl_action As DevComponents.DotNetBar.PanelEx
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
@@ -604,4 +812,18 @@ Partial Class FormVMT
     Friend WithEvents lbl_job As Label
     Friend WithEvents lbl_block_cell_slot As Label
     Friend WithEvents lbl_cont_data As Label
+    Friend WithEvents pnl_visual_block_slot As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents pnl_row As Panel
+    Friend WithEvents lbl_row As Label
+    Friend WithEvents pnl_tier As Panel
+    Friend WithEvents pnl_cell As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents pnl_cell_no_cont As Panel
+    Friend WithEvents lbl_cell_no_cont As Label
+    Friend WithEvents pnl_cell_commodity As Panel
+    Friend WithEvents lbl_cell_commodity As Label
+    Friend WithEvents pnl_cell_iso_class As Panel
+    Friend WithEvents lbl_cell_class As Label
+    Friend WithEvents lbl_cell_iso As Label
+    Friend WithEvents lbl_tier As Label
+    Friend WithEvents img As ImageList
 End Class

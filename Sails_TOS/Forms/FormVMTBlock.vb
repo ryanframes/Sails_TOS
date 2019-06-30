@@ -42,10 +42,7 @@ Public Class FormVMTBlock
     End Sub
 
     Private Sub grid_data_DoubleClick(sender As Object, e As EventArgs) Handles grid_data.DoubleClick
-        '_pForm.popReturn(grid_data.CurrentRow.Cells(0).Value) 'parent form must have popReturn public sub
-        _pForm.txt_block.Text = grid_data.CurrentRow.Cells(0).Value
-        _pForm.txt_block.Tag = grid_data.CurrentRow.Cells(1).Value
-        _pForm.set_slot(grid_data.CurrentRow.Cells(1).Value)
+        _pForm.set_block(grid_data.CurrentRow.Cells(0).Value, grid_data.CurrentRow.Cells(1).Value)
         Me.Close()
     End Sub
 
