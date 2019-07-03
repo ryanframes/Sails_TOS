@@ -56,8 +56,8 @@ Partial Class FormVMT
         Me.lbl_cell_class = New System.Windows.Forms.Label()
         Me.lbl_cell_iso = New System.Windows.Forms.Label()
         Me.pnl_action = New DevComponents.DotNetBar.PanelEx()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.btn_clear_selection = New System.Windows.Forms.Button()
+        Me.txt_no_cont = New System.Windows.Forms.TextBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.pnl_block_slot = New System.Windows.Forms.Panel()
@@ -569,8 +569,8 @@ Partial Class FormVMT
         '
         Me.pnl_action.CanvasColor = System.Drawing.SystemColors.Control
         Me.pnl_action.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.pnl_action.Controls.Add(Me.Button7)
-        Me.pnl_action.Controls.Add(Me.TextBox1)
+        Me.pnl_action.Controls.Add(Me.btn_clear_selection)
+        Me.pnl_action.Controls.Add(Me.txt_no_cont)
         Me.pnl_action.Controls.Add(Me.Button6)
         Me.pnl_action.Controls.Add(Me.Button5)
         Me.pnl_action.DisabledBackColor = System.Drawing.Color.Empty
@@ -586,31 +586,31 @@ Partial Class FormVMT
         Me.pnl_action.Style.GradientAngle = 90
         Me.pnl_action.TabIndex = 4
         '
-        'Button7
+        'btn_clear_selection
         '
-        Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button7.ForeColor = System.Drawing.Color.Black
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(542, 6)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(27, 25)
-        Me.Button7.TabIndex = 15
-        Me.Button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button7.UseVisualStyleBackColor = False
+        Me.btn_clear_selection.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_clear_selection.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_clear_selection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_clear_selection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_clear_selection.ForeColor = System.Drawing.Color.Black
+        Me.btn_clear_selection.Image = CType(resources.GetObject("btn_clear_selection.Image"), System.Drawing.Image)
+        Me.btn_clear_selection.Location = New System.Drawing.Point(542, 6)
+        Me.btn_clear_selection.Name = "btn_clear_selection"
+        Me.btn_clear_selection.Size = New System.Drawing.Size(27, 25)
+        Me.btn_clear_selection.TabIndex = 15
+        Me.btn_clear_selection.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_clear_selection.UseVisualStyleBackColor = False
         '
-        'TextBox1
+        'txt_no_cont
         '
-        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.Black
-        Me.TextBox1.Location = New System.Drawing.Point(394, 6)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(142, 25)
-        Me.TextBox1.TabIndex = 14
+        Me.txt_no_cont.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_no_cont.BackColor = System.Drawing.Color.White
+        Me.txt_no_cont.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_no_cont.ForeColor = System.Drawing.Color.Black
+        Me.txt_no_cont.Location = New System.Drawing.Point(394, 6)
+        Me.txt_no_cont.Name = "txt_no_cont"
+        Me.txt_no_cont.Size = New System.Drawing.Size(142, 25)
+        Me.txt_no_cont.TabIndex = 14
         '
         'Button6
         '
@@ -754,6 +754,7 @@ Partial Class FormVMT
         Me.Controls.Add(Me.pnlTop)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "FormVMT"
         Me.Text = "VMT"
         Me.pnlTop.ResumeLayout(False)
@@ -805,8 +806,8 @@ Partial Class FormVMT
     Friend WithEvents pnl_action As DevComponents.DotNetBar.PanelEx
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
-    Friend WithEvents Button7 As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents btn_clear_selection As Button
+    Friend WithEvents txt_no_cont As TextBox
     Friend WithEvents pnl_job_list As DevComponents.DotNetBar.PanelEx
     Friend WithEvents pnl_job As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lbl_job As Label

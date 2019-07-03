@@ -4,6 +4,7 @@ Public Class FormVMT
     Private _pubUser As String
     Private _pubMch As String
     Private _popUp As String
+
     'Private dtBlock As DataTable
 
     Public Sub New()
@@ -26,17 +27,6 @@ Public Class FormVMT
             Return params
         End Get
     End Property
-
-    Private Sub addJobEffect(ByVal parentPnl As PanelEx)
-        'highlight panel list
-        For Each obj As Control In parentPnl.Controls
-            If TypeOf obj Is Label Then
-                obj.Font = lbl_job.Font
-                AddHandler obj.MouseEnter, AddressOf lbl_listing_MouseEnter
-                AddHandler obj.MouseLeave, AddressOf lbl_listing_MouseLeave
-            End If
-        Next
-    End Sub
 
     Public Property PubUser As String
         Get
@@ -280,20 +270,24 @@ Public Class FormVMT
         Loop
         Dim pnl As Panel
         Dim pnlChld As Panel
-        For i = 1 To maxTier
-            For j As Long = 1 To maxRow
+        Dim iTier As Long = maxTier
+        Dim posTier As Long = 0
+        Do While iTier >= 1
+            For Each lblRow As Label In pnl_row.Controls
                 'create panel cell
                 pnl = New Panel
                 pnl.Size = pnl_cell.Size
                 pnl.BorderStyle = BorderStyle.FixedSingle
                 pnl.Left = pnl_tier.Left + pnl_tier.Width + 3
-                pnl.Name = "pnl_cell_tier" & i & "_row" & j
                 pnl.Visible = True
-                pnl.Top = pnl_tier.Top + (pnl_cell.Height * (i - 1)) + +(3 * (i - 1))
-                pnl.Left = pnl_row.Left + pnl_row.Controls(0).Left * 2 + ((pnl_cell.Width + 2) * (j - 1))
+                posTier = maxTier - iTier
+                pnl.Name = "pnl_cell_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", ""))
+                pnl.Top = pnl_tier.Top + (pnl_cell.Height * posTier) + (3 * posTier)
+                pnl.Left = pnl_row.Left + pnl_row.Controls(0).Left * 2 + lblRow.Left
                 pnl_visual_block_slot.Controls.Add(pnl)
+                'pnl.Controls.Add(New Label With {.Text = "t" & iTier & "r" & CLng(Replace(lblRow.Name, "lbl_row", "")), .Visible = True, .Dock = DockStyle.Fill, .AutoSize = True})
 
-                If maxTier - i >= avbTier Then
+                If iTier > avbTier Then
                     'jika tier i lebih besar dari avb tier maka 
                     pnl.Enabled = False
                     pnl.BackgroundImage = My.Resources.remove_icon_20
@@ -302,55 +296,68 @@ Public Class FormVMT
                 End If
 
                 'get cell info
-                dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock)
+                dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock & "&tier=" & iTier & "&row=" & CLng(Replace(lblRow.Name, "lbl_row", "")))
 
-                'add no cont
-                pnlChld = New Panel
-                pnlChld.Size = pnl_cell_no_cont.Size
-                pnlChld.Dock = DockStyle.Top
-                pnlChld.Name = "pnl_cell_cont_tier" & i & "_row" & j
-                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_cont_tier" & i & "_row" & j,
-                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
-                                     .Visible = True, .Text = "1234", .MinimumSize = pnl_cell_no_cont.Size, .TextAlign = ContentAlignment.MiddleRight})
-                pnl.Controls.Add(pnlChld)
-
-                'add commodity
-                pnlChld = New Panel
-                pnlChld.Dock = DockStyle.Top
-                pnlChld.Size = pnl_cell_commodity.Size
-                pnlChld.Name = "pnl_cell_commodity_tier" & i & "_row" & j
-                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_commodity_tier" & i & "_row" & j,
-                                     .Dock = DockStyle.Left, .AutoSize = True, .Font = lbl_cell_iso.Font,
-                                     .Visible = True, .Text = "G", .MinimumSize = pnl_cell_no_cont.Size})
-                pnl.Controls.Add(pnlChld)
-
-                'add iso & class
-                pnlChld = New Panel
-                pnlChld.Dock = DockStyle.Top
-                pnlChld.Size = pnl_cell_iso_class.Size
-                pnlChld.Name = "pnl_cell_iso_tier" & i & "_row" & j
-                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_iso_tier" & i & "_row" & j,
-                                     .Dock = DockStyle.Fill, .AutoSize = True, .Font = lbl_cell_iso.Font,
-                                     .Visible = True, .Text = "2200"})
-                pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_class_tier" & i & "_row" & j,
-                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
-                                     .Visible = True, .Text = "I"})
-                pnl.Controls.Add(pnlChld)
-
-                'add event mouse enter and leave for every label in pnl cell
-                For Each obj As Control In pnl.Controls
-                    obj.BackColor = Color.Transparent
-                    If TypeOf obj Is Panel Then
-                        For Each ctrl As Control In obj.Controls
-                            If TypeOf ctrl Is Label Then
-                                AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
-                                AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
-                            End If
-                        Next
+                If dt.Rows.Count > 0 Then
+                    If dt.Rows(0)("VOID") = 1 Then
+                        'check void status
+                        pnl.Enabled = False
+                        pnl.BackgroundImage = My.Resources.remove_icon_20
+                        pnl.BackgroundImageLayout = ImageLayout.Tile
+                        Continue For
+                    ElseIf dt.Rows(0)("STATUS") <> 1 Then
+                        Continue For 'ONLY FOR STATUS=1 
                     End If
-                Next
+                    'add no cont
+                    pnlChld = New Panel
+                    pnlChld.Tag = dt.Rows(0)("ID_CELL")
+                    pnlChld.Size = pnl_cell_no_cont.Size
+                    pnlChld.Dock = DockStyle.Top
+                    pnlChld.Name = "pnl_cell_cont_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", ""))
+                    pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_cont_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", "")),
+                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = Strings.Right(dt.Rows(0)("NO_CONT"), 4), .MinimumSize = pnl_cell_no_cont.Size, .TextAlign = ContentAlignment.MiddleRight})
+                    pnl.Controls.Add(pnlChld)
+
+                    'add commodity
+                    pnlChld = New Panel
+                    pnlChld.Dock = DockStyle.Top
+                    pnlChld.Size = pnl_cell_commodity.Size
+                    pnlChld.Name = "pnl_cell_commodity_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", ""))
+                    pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_commodity_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", "")),
+                                     .Dock = DockStyle.Left, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = dt.Rows(0)("COMMODITY"), .MinimumSize = pnl_cell_no_cont.Size})
+                    pnl.Controls.Add(pnlChld)
+
+                    'add iso & class
+                    pnlChld = New Panel
+                    pnlChld.Dock = DockStyle.Top
+                    pnlChld.Size = pnl_cell_iso_class.Size
+                    pnlChld.Name = "pnl_cell_iso_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", ""))
+                    pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_iso_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", "")),
+                                     .Dock = DockStyle.Fill, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = dt.Rows(0)("ISO")})
+                    pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_class_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", "")),
+                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = dt.Rows(0)("CLASS")})
+                    pnl.Controls.Add(pnlChld)
+
+                    'add event mouse enter and leave for every label in pnl cell
+                    For Each obj As Control In pnl.Controls
+                        obj.BackColor = Color.Transparent
+                        If TypeOf obj Is Panel Then
+                            For Each ctrl As Control In obj.Controls
+                                If TypeOf ctrl Is Label Then
+                                    AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
+                                    AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
+                                End If
+                            Next
+                        End If
+                    Next
+                End If
             Next
-        Next
+            iTier = iTier - 1
+        Loop
 #End Region
         pnl_visual_block_slot.Visible = True
     End Sub
@@ -367,6 +374,11 @@ Public Class FormVMT
     Private Sub lbl_listing_MouseLeave(sender As Object, e As EventArgs)
         CType(sender, Label).BackColor = Color.Transparent
         CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = SystemColors.ButtonFace
+    End Sub
+
+    Private Sub lbl_listing_Click(sender As Object, e As EventArgs)
+        txt_no_cont.Text = CType(CType(sender, Label).Parent, PanelEx).Name
+        _preferedCell.BackColor = Color.FromArgb(255, 255, 192)
     End Sub
 
     Private Sub show_list_job()
@@ -437,7 +449,16 @@ Public Class FormVMT
             If dt.Rows(i)("CLASS") & dt.Rows(i)("ONCH_PLCMT") = "EP" Then lbl.Text = "GI"
             lbl.Visible = True
             lbl.SendToBack()
-            addJobEffect(objPnl)
+
+            'highlight panel list
+            For Each obj As Control In objPnl.Controls
+                If TypeOf obj Is Label Then
+                    obj.Font = lbl_job.Font
+                    AddHandler obj.MouseEnter, AddressOf lbl_listing_MouseEnter
+                    AddHandler obj.MouseLeave, AddressOf lbl_listing_MouseLeave
+                    AddHandler obj.Click, AddressOf lbl_listing_click
+                End If
+            Next
         Next
     End Sub
 
@@ -536,5 +557,9 @@ Public Class FormVMT
 
     Private Sub btn_slot_next_Click(sender As Object, e As EventArgs) Handles btn_slot_next.Click
         set_slot_next()
+    End Sub
+
+    Private Sub btn_slot_prev_Click(sender As Object, e As EventArgs) Handles btn_slot_prev.Click
+        set_slot_prev()
     End Sub
 End Class
