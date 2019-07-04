@@ -26,7 +26,6 @@ E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\Newtonsoft.Json.xml
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbprojAssemblyReference.cache
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType.resources
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineType_Input.resources
-E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTemplates.resources
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Resources.resources
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.GenerateResource.cache
 E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.vbproj.CoreCompileInputs.cache
@@ -181,3 +180,45 @@ E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormV
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.MDIForm.resources
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMTBlock.resources
 E:\Source Code\My Source Code\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMTSlot.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Form1.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.Form2.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormAuthentification.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiry.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryDateTime.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryHold.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormContainerInquiryJobHistory.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputGrade.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputPart.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormDamageCode_InputType.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormFindContainer.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormHRMchDriver.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormInboundData.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormInboundData_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormInboundData_UploadBaplie.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormITV.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormJobController.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormJobControl_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineSpec.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormMachineSpec_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormQuayLane.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormTruckCode_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMT.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMTBlock.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormVMTSlot.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormYardDefinition.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormYardDefinition_Input.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.FormYardDefinition_InputSlot.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\obj\Debug\Sails_TOS.MDIForm.resources
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DocumentFormat.OpenXml.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ExcelNumberFormat.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\FastMember.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.dll
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.pdb
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ClosedXML.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\DocumentFormat.OpenXml.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\ExcelNumberFormat.xml
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.pdb
+E:\BSI\ILCS\Sails_TOS\Sails_TOS\bin\Debug\LumenWorks.Framework.IO.xml

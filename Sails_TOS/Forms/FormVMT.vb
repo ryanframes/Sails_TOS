@@ -185,7 +185,7 @@ Public Class FormVMT
     End Sub
 
     Private Sub pnl_cell_Click(sender As Object, e As EventArgs)
-
+        MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & , "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
     End Sub
 
     Private Sub show_list_row_tier()
@@ -264,6 +264,8 @@ Public Class FormVMT
         Do While pnl_visual_block_slot.Controls.Count > 6
             For Each obj As Control In pnl_visual_block_slot.Controls
                 If obj.Name.Contains("pnl_cell") And obj.Name <> pnl_cell.Name Then
+                    'remove handler
+                    RemoveHandler obj.Click, AddressOf pnl_cell_Click
                     pnl_visual_block_slot.Controls.Remove(obj)
                 End If
             Next
@@ -285,6 +287,8 @@ Public Class FormVMT
                 pnl.Top = pnl_tier.Top + (pnl_cell.Height * posTier) + (3 * posTier)
                 pnl.Left = pnl_row.Left + pnl_row.Controls(0).Left * 2 + lblRow.Left
                 pnl_visual_block_slot.Controls.Add(pnl)
+                'add event click handler
+                AddHandler pnl.Click, AddressOf pnl_cell_Click
                 'pnl.Controls.Add(New Label With {.Text = "t" & iTier & "r" & CLng(Replace(lblRow.Name, "lbl_row", "")), .Visible = True, .Dock = DockStyle.Fill, .AutoSize = True})
 
                 If iTier > avbTier Then
@@ -378,7 +382,15 @@ Public Class FormVMT
 
     Private Sub lbl_listing_Click(sender As Object, e As EventArgs)
         txt_no_cont.Text = CType(CType(sender, Label).Parent, PanelEx).Name
-        _preferedCell.BackColor = Color.FromArgb(255, 255, 192)
+        'find pa plan control and pa plan loc
+        Dim str As String() = Strings.Split(CType(CType(sender, Label).Parent, PanelEx).Controls(0).Name, "_loc")
+        Dim strLoc As String() = Split(str(1), "-") 'split pa plan; format block_name, stack_name, row, tier
+
+        If strLoc(0) <> txt_block.Text Or strLoc(1) <> txt_slot.Text Then Return
+
+        Dim iTier As Long = strLoc(3), iRow As Long = strLoc(2)
+        Dim ctrl As Control() = pnl_visual_block_slot.Controls.Find("pnl_cell_tier" & iTier & "_row" & iRow, True)
+        ctrl(0).BackColor = Color.FromArgb(255, 255, 192)
     End Sub
 
     Private Sub show_list_job()
@@ -413,17 +425,17 @@ Public Class FormVMT
             objPnl.Visible = True
             objPnl.Size = pnl_job.Size
             objPnl.Style.BackColor1.Color = SystemColors.ButtonFace
+            objPnl.Name = dt.Rows(i)("TRUCK_ID")
             Dim lbl As Label
 
             'add label block cell slot (?)
             lbl = New Label
             lbl.Dock = DockStyle.Top
-            lbl.Name = "lbl_block_cell_slot_" & dt.Rows(i)("NO_CONT")
+            lbl.Name = "lbl_pa_plan" & dt.Rows(i)("NO_CONT") & "_loc" & dt.Rows(i)("PA_PLAN")
             lbl.Text = dt.Rows(i)("PA_PLAN") & " " & dt.Rows(i)("WEIGHT") & "T" & " " & dt.Rows(i)("TID") & " " & dt.Rows(i)("FA")
             lbl.Visible = True
             lbl.TextAlign = ContentAlignment.MiddleLeft
             objPnl.Controls.Add(lbl)
-
 
             'add label cont_data
             lbl = New Label
@@ -535,8 +547,10 @@ Public Class FormVMT
     End Sub
 
     Private Sub cmb_block_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmb_block.SelectedValueChanged
-        set_block(cmb_block.Text, IIf(IsNothing(cmb_block.SelectedValue), "", cmb_block.SelectedValue))
-        show_list_job()
+        If cmb_block.Text <> "" Then
+            set_block(cmb_block.Text, IIf(IsNothing(cmb_block.SelectedValue), "", cmb_block.SelectedValue))
+            show_list_job()
+        End If
     End Sub
 
     Private Sub pnl_tier_Resize(sender As Object, e As EventArgs) Handles pnl_tier.Resize

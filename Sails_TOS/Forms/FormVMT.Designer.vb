@@ -451,7 +451,7 @@ Partial Class FormVMT
         Me.lbl_tier.Location = New System.Drawing.Point(1, 1)
         Me.lbl_tier.MinimumSize = New System.Drawing.Size(15, 60)
         Me.lbl_tier.Name = "lbl_tier"
-        Me.lbl_tier.Size = New System.Drawing.Size(15, 60)
+        Me.lbl_tier.Size = New System.Drawing.Size(16, 60)
         Me.lbl_tier.TabIndex = 77
         Me.lbl_tier.Text = "1"
         Me.lbl_tier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -495,9 +495,9 @@ Partial Class FormVMT
         Me.lbl_cell_no_cont.Dock = System.Windows.Forms.DockStyle.Right
         Me.lbl_cell_no_cont.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_cell_no_cont.ForeColor = System.Drawing.Color.Black
-        Me.lbl_cell_no_cont.Location = New System.Drawing.Point(23, 0)
+        Me.lbl_cell_no_cont.Location = New System.Drawing.Point(21, 0)
         Me.lbl_cell_no_cont.Name = "lbl_cell_no_cont"
-        Me.lbl_cell_no_cont.Size = New System.Drawing.Size(33, 15)
+        Me.lbl_cell_no_cont.Size = New System.Drawing.Size(35, 15)
         Me.lbl_cell_no_cont.TabIndex = 71
         Me.lbl_cell_no_cont.Text = "1234"
         Me.lbl_cell_no_cont.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -544,9 +544,9 @@ Partial Class FormVMT
         Me.lbl_cell_class.Dock = System.Windows.Forms.DockStyle.Right
         Me.lbl_cell_class.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_cell_class.ForeColor = System.Drawing.Color.Black
-        Me.lbl_cell_class.Location = New System.Drawing.Point(45, 0)
+        Me.lbl_cell_class.Location = New System.Drawing.Point(46, 0)
         Me.lbl_cell_class.Name = "lbl_cell_class"
-        Me.lbl_cell_class.Size = New System.Drawing.Size(11, 15)
+        Me.lbl_cell_class.Size = New System.Drawing.Size(10, 15)
         Me.lbl_cell_class.TabIndex = 71
         Me.lbl_cell_class.Text = "I"
         Me.lbl_cell_class.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -625,6 +625,7 @@ Partial Class FormVMT
         Me.Button6.Text = "On Chassis"
         Me.Button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button6.UseVisualStyleBackColor = False
+        Me.Button6.Visible = False
         '
         'Button5
         '
