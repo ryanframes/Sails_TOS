@@ -58,6 +58,7 @@ Public Class FormVMTSlot
 
     Sub fill_grid()
         Dim sCol As New Dictionary(Of String, String)
+        sCol.Add("20_STACKNAME", "20_STACKNAME")
         showDataGrid(grid_data, pubApiAddress, "rts_vmtyrd_getslotlist", "id_block=" & _idBlock, sCol)
         grid_data.RowHeadersVisible = False
         grid_data.ColumnHeadersVisible = False

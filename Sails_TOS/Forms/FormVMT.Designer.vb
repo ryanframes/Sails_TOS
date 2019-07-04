@@ -58,8 +58,8 @@ Partial Class FormVMT
         Me.pnl_action = New DevComponents.DotNetBar.PanelEx()
         Me.btn_clear_selection = New System.Windows.Forms.Button()
         Me.txt_no_cont = New System.Windows.Forms.TextBox()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.btn_chasis = New System.Windows.Forms.Button()
+        Me.btn_active_job = New System.Windows.Forms.Button()
         Me.pnl_block_slot = New System.Windows.Forms.Panel()
         Me.btn_slot_prev = New System.Windows.Forms.Button()
         Me.txt_slot = New System.Windows.Forms.TextBox()
@@ -451,7 +451,7 @@ Partial Class FormVMT
         Me.lbl_tier.Location = New System.Drawing.Point(1, 1)
         Me.lbl_tier.MinimumSize = New System.Drawing.Size(15, 60)
         Me.lbl_tier.Name = "lbl_tier"
-        Me.lbl_tier.Size = New System.Drawing.Size(16, 60)
+        Me.lbl_tier.Size = New System.Drawing.Size(15, 60)
         Me.lbl_tier.TabIndex = 77
         Me.lbl_tier.Text = "1"
         Me.lbl_tier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -490,17 +490,16 @@ Partial Class FormVMT
         '
         'lbl_cell_no_cont
         '
-        Me.lbl_cell_no_cont.AutoSize = True
         Me.lbl_cell_no_cont.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lbl_cell_no_cont.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lbl_cell_no_cont.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lbl_cell_no_cont.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_cell_no_cont.ForeColor = System.Drawing.Color.Black
-        Me.lbl_cell_no_cont.Location = New System.Drawing.Point(21, 0)
+        Me.lbl_cell_no_cont.Location = New System.Drawing.Point(0, 3)
         Me.lbl_cell_no_cont.Name = "lbl_cell_no_cont"
-        Me.lbl_cell_no_cont.Size = New System.Drawing.Size(35, 15)
+        Me.lbl_cell_no_cont.Size = New System.Drawing.Size(56, 15)
         Me.lbl_cell_no_cont.TabIndex = 71
         Me.lbl_cell_no_cont.Text = "1234"
-        Me.lbl_cell_no_cont.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lbl_cell_no_cont.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'pnl_cell_commodity
         '
@@ -539,17 +538,16 @@ Partial Class FormVMT
         '
         'lbl_cell_class
         '
-        Me.lbl_cell_class.AutoSize = True
         Me.lbl_cell_class.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lbl_cell_class.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lbl_cell_class.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbl_cell_class.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_cell_class.ForeColor = System.Drawing.Color.Black
-        Me.lbl_cell_class.Location = New System.Drawing.Point(46, 0)
+        Me.lbl_cell_class.Location = New System.Drawing.Point(35, 0)
         Me.lbl_cell_class.Name = "lbl_cell_class"
-        Me.lbl_cell_class.Size = New System.Drawing.Size(10, 15)
+        Me.lbl_cell_class.Size = New System.Drawing.Size(21, 18)
         Me.lbl_cell_class.TabIndex = 71
         Me.lbl_cell_class.Text = "I"
-        Me.lbl_cell_class.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lbl_cell_class.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lbl_cell_iso
         '
@@ -571,8 +569,8 @@ Partial Class FormVMT
         Me.pnl_action.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.pnl_action.Controls.Add(Me.btn_clear_selection)
         Me.pnl_action.Controls.Add(Me.txt_no_cont)
-        Me.pnl_action.Controls.Add(Me.Button6)
-        Me.pnl_action.Controls.Add(Me.Button5)
+        Me.pnl_action.Controls.Add(Me.btn_chasis)
+        Me.pnl_action.Controls.Add(Me.btn_active_job)
         Me.pnl_action.DisabledBackColor = System.Drawing.Color.Empty
         Me.pnl_action.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnl_action.Location = New System.Drawing.Point(0, 63)
@@ -612,34 +610,33 @@ Partial Class FormVMT
         Me.txt_no_cont.Size = New System.Drawing.Size(142, 25)
         Me.txt_no_cont.TabIndex = 14
         '
-        'Button6
+        'btn_chasis
         '
-        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.ForeColor = System.Drawing.Color.Black
-        Me.Button6.Location = New System.Drawing.Point(113, 6)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(101, 25)
-        Me.Button6.TabIndex = 12
-        Me.Button6.Text = "On Chassis"
-        Me.Button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button6.UseVisualStyleBackColor = False
-        Me.Button6.Visible = False
+        Me.btn_chasis.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_chasis.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_chasis.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_chasis.ForeColor = System.Drawing.Color.Black
+        Me.btn_chasis.Location = New System.Drawing.Point(113, 6)
+        Me.btn_chasis.Name = "btn_chasis"
+        Me.btn_chasis.Size = New System.Drawing.Size(101, 25)
+        Me.btn_chasis.TabIndex = 12
+        Me.btn_chasis.Text = "On Chassis"
+        Me.btn_chasis.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_chasis.UseVisualStyleBackColor = False
         '
-        'Button5
+        'btn_active_job
         '
-        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.ForeColor = System.Drawing.Color.Black
-        Me.Button5.Location = New System.Drawing.Point(6, 6)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(101, 25)
-        Me.Button5.TabIndex = 11
-        Me.Button5.Text = "Activate Job"
-        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button5.UseVisualStyleBackColor = False
+        Me.btn_active_job.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btn_active_job.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btn_active_job.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_active_job.ForeColor = System.Drawing.Color.Black
+        Me.btn_active_job.Location = New System.Drawing.Point(6, 6)
+        Me.btn_active_job.Name = "btn_active_job"
+        Me.btn_active_job.Size = New System.Drawing.Size(101, 25)
+        Me.btn_active_job.TabIndex = 11
+        Me.btn_active_job.Text = "Activate Job"
+        Me.btn_active_job.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btn_active_job.UseVisualStyleBackColor = False
         '
         'pnl_block_slot
         '
@@ -755,7 +752,6 @@ Partial Class FormVMT
         Me.Controls.Add(Me.pnlTop)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "FormVMT"
         Me.Text = "VMT"
         Me.pnlTop.ResumeLayout(False)
@@ -771,7 +767,6 @@ Partial Class FormVMT
         Me.pnl_tier.PerformLayout()
         Me.pnl_cell.ResumeLayout(False)
         Me.pnl_cell_no_cont.ResumeLayout(False)
-        Me.pnl_cell_no_cont.PerformLayout()
         Me.pnl_cell_commodity.ResumeLayout(False)
         Me.pnl_cell_commodity.PerformLayout()
         Me.pnl_cell_iso_class.ResumeLayout(False)
@@ -805,8 +800,8 @@ Partial Class FormVMT
     Friend WithEvents txt_slot As TextBox
     Friend WithEvents btn_slot_next As Button
     Friend WithEvents pnl_action As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
+    Friend WithEvents btn_chasis As Button
+    Friend WithEvents btn_active_job As Button
     Friend WithEvents btn_clear_selection As Button
     Friend WithEvents txt_no_cont As TextBox
     Friend WithEvents pnl_job_list As DevComponents.DotNetBar.PanelEx

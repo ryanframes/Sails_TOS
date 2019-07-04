@@ -4,8 +4,48 @@ Public Class FormVMT
     Private _pubUser As String
     Private _pubMch As String
     Private _popUp As String
+    Private _preferedCell As Control 'variable untuk menyimpan posisi prefered cell
+    Private _formMode As formMode
+    Private _selectedJob As New selectedJob With {.ContNo = "", .Job = "", .Location = ""} 'set default selectedJob
 
-    'Private dtBlock As DataTable
+    Private Class selectedJob
+        'private class untuk store selected job info
+        Private _contNo As String
+        Private _job As String
+        Private _location As String
+
+        Public Property ContNo As String
+            Get
+                Return _contNo
+            End Get
+            Set(value As String)
+                _contNo = value
+            End Set
+        End Property
+
+        Public Property Job As String
+            Get
+                Return _job
+            End Get
+            Set(value As String)
+                _job = value
+            End Set
+        End Property
+
+        Public Property Location As String
+            Get
+                Return _location
+            End Get
+            Set(value As String)
+                _location = value
+            End Set
+        End Property
+    End Class
+
+    Private Enum formMode
+        _onPlacement = 1
+        _onChasis = 2
+    End Enum
 
     Public Sub New()
 
@@ -52,6 +92,7 @@ Public Class FormVMT
         Dim crs As Cursor = Cursor.Current
         Cursor.Current = Cursors.WaitCursor
         show_list_row_tier()
+        _formMode = Nothing
         Cursor.Current = crs
     End Sub
 
@@ -185,7 +226,46 @@ Public Class FormVMT
     End Sub
 
     Private Sub pnl_cell_Click(sender As Object, e As EventArgs)
-        MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & , "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        'event saat cell di click 
+        If IsNothing(_formMode) Then Return
+
+        If txt_no_cont.Text = "" Then Return
+        'find tier and row address
+        Dim str As String()
+        If TypeOf sender Is Panel Then
+            'panel cell langsung tanpa label2
+            str = Strings.Split(CType(sender, Panel).Name, "_row")
+        Else
+            'label yg di click
+            str = Strings.Split(CType(sender, Label).Parent.Parent.Name, "_row")
+        End If
+        'get tier and row
+        Dim iTier As Long = str(0).Replace("pnl_cell_tier", "")
+        Dim iRow As String = str(1).PadLeft(2, "0")
+        Dim res As DialogResult
+        If _formMode = formMode._onPlacement Then
+#Region "Save OnPlacement"
+            'validasi placement
+            If pnl_cell.Controls.Count > 0 Then
+                MessageBoxEx.Show("Location is already in used.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            res = MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & txt_block.Text & "-" & txt_slot.Text & "-" & iRow & "-" & iTier, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If res <> DialogResult.Yes Then Return
+
+            'check kondisi job
+            If _selectedJob.Job = "DS" Then
+
+            ElseIf _selectedJob.Job = "GI" Then
+
+            End If
+#End Region
+        ElseIf _formMode = formMode._onChasis Then
+#Region "Save onChassis"
+
+#End Region
+        End If
     End Sub
 
     Private Sub show_list_row_tier()
@@ -264,7 +344,10 @@ Public Class FormVMT
         Do While pnl_visual_block_slot.Controls.Count > 6
             For Each obj As Control In pnl_visual_block_slot.Controls
                 If obj.Name.Contains("pnl_cell") And obj.Name <> pnl_cell.Name Then
-                    'remove handler
+                    For Each chldObj As Control In obj.Controls
+                        'remove handler
+                        RemoveHandler chldObj.Click, AddressOf pnl_cell_Click
+                    Next
                     RemoveHandler obj.Click, AddressOf pnl_cell_Click
                     pnl_visual_block_slot.Controls.Remove(obj)
                 End If
@@ -287,7 +370,6 @@ Public Class FormVMT
                 pnl.Top = pnl_tier.Top + (pnl_cell.Height * posTier) + (3 * posTier)
                 pnl.Left = pnl_row.Left + pnl_row.Controls(0).Left * 2 + lblRow.Left
                 pnl_visual_block_slot.Controls.Add(pnl)
-                'add event click handler
                 AddHandler pnl.Click, AddressOf pnl_cell_Click
                 'pnl.Controls.Add(New Label With {.Text = "t" & iTier & "r" & CLng(Replace(lblRow.Name, "lbl_row", "")), .Visible = True, .Dock = DockStyle.Fill, .AutoSize = True})
 
@@ -303,6 +385,8 @@ Public Class FormVMT
                 dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock & "&tier=" & iTier & "&row=" & CLng(Replace(lblRow.Name, "lbl_row", "")))
 
                 If dt.Rows.Count > 0 Then
+                    'id cell di simpan di panel cell tag, supaya saat pengecekan cell save 
+                    pnl.Tag = dt.Rows(0)("ID_CELL")
                     If dt.Rows(0)("VOID") = 1 Then
                         'check void status
                         pnl.Enabled = False
@@ -314,13 +398,14 @@ Public Class FormVMT
                     End If
                     'add no cont
                     pnlChld = New Panel
-                    pnlChld.Tag = dt.Rows(0)("ID_CELL")
+                    'pnlChld.Tag = dt.Rows(0)("ID_CELL")
                     pnlChld.Size = pnl_cell_no_cont.Size
                     pnlChld.Dock = DockStyle.Top
                     pnlChld.Name = "pnl_cell_cont_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", ""))
                     pnlChld.Controls.Add(New Label With {.Name = "lbl_cell_cont_tier" & iTier & "_row" & CLng(Replace(lblRow.Name, "lbl_row", "")),
-                                     .Dock = DockStyle.Right, .AutoSize = True, .Font = lbl_cell_iso.Font,
-                                     .Visible = True, .Text = Strings.Right(dt.Rows(0)("NO_CONT"), 4), .MinimumSize = pnl_cell_no_cont.Size, .TextAlign = ContentAlignment.MiddleRight})
+                                     .Dock = DockStyle.Bottom, .AutoSize = False, .Font = lbl_cell_iso.Font,
+                                     .Visible = True, .Text = Strings.Right(dt.Rows(0)("NO_CONT"), 4),
+                                     .MinimumSize = pnl_cell_no_cont.Size, .TextAlign = ContentAlignment.MiddleRight})
                     pnl.Controls.Add(pnlChld)
 
                     'add commodity
@@ -354,6 +439,7 @@ Public Class FormVMT
                                 If TypeOf ctrl Is Label Then
                                     AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
                                     AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
+                                    AddHandler ctrl.Click, AddressOf pnl_cell_Click
                                 End If
                             Next
                         End If
@@ -370,27 +456,37 @@ Public Class FormVMT
         Dim dt As DataTable = fc_vmtyrd_getcell(pubApiAddress, "")
     End Sub
 
-    Private Sub lbl_listing_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub lbl_list_job_MouseEnter(sender As Object, e As EventArgs)
         CType(sender, Label).BackColor = Color.FromArgb(255, 255, 192)
         CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = Color.FromArgb(255, 255, 192)
     End Sub
 
-    Private Sub lbl_listing_MouseLeave(sender As Object, e As EventArgs)
+    Private Sub lbl_list_job_MouseLeave(sender As Object, e As EventArgs)
         CType(sender, Label).BackColor = Color.Transparent
         CType(CType(sender, Label).Parent, PanelEx).Style.BackColor1.Color = SystemColors.ButtonFace
     End Sub
 
-    Private Sub lbl_listing_Click(sender As Object, e As EventArgs)
+    Private Sub lbl_list_job_Click(sender As Object, e As EventArgs)
         txt_no_cont.Text = CType(CType(sender, Label).Parent, PanelEx).Name
         'find pa plan control and pa plan loc
         Dim str As String() = Strings.Split(CType(CType(sender, Label).Parent, PanelEx).Controls(0).Name, "_loc")
         Dim strLoc As String() = Split(str(1), "-") 'split pa plan; format block_name, stack_name, row, tier
 
+        'set prev preferred cell bg to normal
+        If _preferedCell IsNot Nothing Then _preferedCell.BackColor = SystemColors.HighlightText
+        'check job status
+        btn_chasis.Visible = sender.parent.controls(2).text = "GO" Or sender.parent.controls(2).text = "LD" 'job status sudah on chasis
         If strLoc(0) <> txt_block.Text Or strLoc(1) <> txt_slot.Text Then Return
 
         Dim iTier As Long = strLoc(3), iRow As Long = strLoc(2)
         Dim ctrl As Control() = pnl_visual_block_slot.Controls.Find("pnl_cell_tier" & iTier & "_row" & iRow, True)
-        ctrl(0).BackColor = Color.FromArgb(255, 255, 192)
+        _preferedCell = ctrl(0)
+        _preferedCell.BackColor = Color.FromArgb(255, 255, 192)
+
+        _selectedJob.ContNo = txt_no_cont.Text
+        _selectedJob.Job = sender.parent.controls(2).text
+        _selectedJob.Location = str(1)
+
     End Sub
 
     Private Sub show_list_job()
@@ -405,8 +501,8 @@ Public Class FormVMT
         For Each obj As Control In pnl_job_list.Controls
             'remove event handler
             If TypeOf obj Is Label Then
-                RemoveHandler obj.MouseEnter, AddressOf lbl_listing_MouseEnter
-                RemoveHandler obj.MouseLeave, AddressOf lbl_listing_MouseLeave
+                RemoveHandler obj.MouseEnter, AddressOf lbl_list_job_MouseEnter
+                RemoveHandler obj.MouseLeave, AddressOf lbl_list_job_MouseLeave
             End If
         Next
         pnl_job_list.Controls.Clear()
@@ -415,6 +511,7 @@ Public Class FormVMT
             'add panel
             Dim objPnl As New PanelEx
             objPnl.Name = dt.Rows(i)("NO_CONT")
+            objPnl.Tag = dt.Rows(i)("TRUCK_ID")
             pnl_job_list.Controls.Add(objPnl)
             objPnl.Dock = DockStyle.Top
             objPnl.Padding = New Windows.Forms.Padding(5)
@@ -425,7 +522,7 @@ Public Class FormVMT
             objPnl.Visible = True
             objPnl.Size = pnl_job.Size
             objPnl.Style.BackColor1.Color = SystemColors.ButtonFace
-            objPnl.Name = dt.Rows(i)("TRUCK_ID")
+            'objPnl.Name = dt.Rows(i)("TRUCK_ID")
             Dim lbl As Label
 
             'add label block cell slot (?)
@@ -466,9 +563,9 @@ Public Class FormVMT
             For Each obj As Control In objPnl.Controls
                 If TypeOf obj Is Label Then
                     obj.Font = lbl_job.Font
-                    AddHandler obj.MouseEnter, AddressOf lbl_listing_MouseEnter
-                    AddHandler obj.MouseLeave, AddressOf lbl_listing_MouseLeave
-                    AddHandler obj.Click, AddressOf lbl_listing_click
+                    AddHandler obj.MouseEnter, AddressOf lbl_list_job_MouseEnter
+                    AddHandler obj.MouseLeave, AddressOf lbl_list_job_MouseLeave
+                    AddHandler obj.Click, AddressOf lbl_list_job_Click
                 End If
             Next
         Next
@@ -576,4 +673,32 @@ Public Class FormVMT
     Private Sub btn_slot_prev_Click(sender As Object, e As EventArgs) Handles btn_slot_prev.Click
         set_slot_prev()
     End Sub
+
+    Private Sub pnl_cell_commodity_Paint(sender As Object, e As PaintEventArgs) Handles pnl_cell_commodity.Paint
+
+    End Sub
+
+    Private Sub btn_clear_selection_Click(sender As Object, e As EventArgs) Handles btn_clear_selection.Click
+        txt_no_cont.Text = ""
+        If _preferedCell IsNot Nothing Then
+            _preferedCell.BackColor = SystemColors.HighlightText
+            _preferedCell = Nothing
+        End If
+        'clear selected cell
+        _selectedJob.ContNo = ""
+        _selectedJob.Job = ""
+        _selectedJob.Location = ""
+
+        btn_chasis.Visible = False
+        _formMode = Nothing
+    End Sub
+
+    Private Sub btn_active_job_Click(sender As Object, e As EventArgs) Handles btn_active_job.Click
+        _formMode = formMode._onPlacement
+    End Sub
+
+    Private Sub btn_chasis_Click(sender As Object, e As EventArgs) Handles btn_chasis.Click
+        _formMode = formMode._onChasis
+    End Sub
+
 End Class
