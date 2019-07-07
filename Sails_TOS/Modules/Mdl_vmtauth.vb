@@ -23,14 +23,15 @@
         Return dt
     End Function
 
-    Function fc_vmtauth_login(ByVal mch_type As String, ByVal user As String) As Boolean
+    Function fc_vmtauth_login(ByVal mch_type As String, ByVal user As String, ByVal mch_name As String) As Boolean
         If mch_type = "ITV" Then
             Dim frm As New FormITV
             frm.lbl_user.Text = user
             frm.Show()
         Else
             Dim frm As New FormVMT
-            frm.lbl_user.Text = user
+            frm.PubUser = user
+            frm.PubMch = mch_name
             frm.Show()
         End If
         Return True

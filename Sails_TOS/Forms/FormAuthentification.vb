@@ -112,7 +112,7 @@ Public Class FormAuthentification
             If Not textValidation(cmb_mch_name, "Machine Name") Then Return
             If Not textValidation(cmb_team, "Team") Then Return
             'LOGIN HERE
-            If fc_vmtauth_login(cmb_mch_type.Text, txt_user.Text) Then Me.Close()
+            If fc_vmtauth_login(cmb_mch_type.Text, txt_user.Text, cmb_mch_name.Text) Then Me.Close()
         End If
     End Sub
 End Class

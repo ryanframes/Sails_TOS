@@ -6,13 +6,18 @@ Public Class FormVMT
     Private _popUp As String
     Private _preferedCell As Control 'variable untuk menyimpan posisi prefered cell
     Private _formMode As formMode
-    Private _selectedJob As New selectedJob With {.ContNo = "", .Job = "", .Location = ""} 'set default selectedJob
+    'Private _selectedJob As New selectedJob With {.ContNo = "", .Job = "", .Location = "", .IdTruck = 0, .IdVVD = 0, .Point = 0} 'set default selectedJob
+    Private dtJob As DataTable
+    Private dtJobSelected As DataTable
 
     Private Class selectedJob
         'private class untuk store selected job info
         Private _contNo As String
         Private _job As String
         Private _location As String
+        Private _idTruck As Integer
+        Private _idVVD As Integer
+        Private _point As Integer
 
         Public Property ContNo As String
             Get
@@ -38,6 +43,33 @@ Public Class FormVMT
             End Get
             Set(value As String)
                 _location = value
+            End Set
+        End Property
+
+        Public Property IdTruck As Integer
+            Get
+                Return _idTruck
+            End Get
+            Set(value As Integer)
+                _idTruck = value
+            End Set
+        End Property
+
+        Public Property IdVVD As Integer
+            Get
+                Return _idVVD
+            End Get
+            Set(value As Integer)
+                _idVVD = value
+            End Set
+        End Property
+
+        Public Property Point As Integer
+            Get
+                Return _point
+            End Get
+            Set(value As Integer)
+                _point = value
             End Set
         End Property
     End Class
@@ -111,7 +143,7 @@ Public Class FormVMT
         End If
     End Sub
 
-    Private Sub set_slot(ByVal txt As String, ByVal id As String)
+    Sub set_slot(ByVal txt As String, ByVal id As String)
         txt_slot.Text = txt
         txt_slot.Tag = id
         refresh_visualisasi()
@@ -207,7 +239,7 @@ Public Class FormVMT
         dt.DefaultView.Sort = "ID_STACK DESC"
         For i As Integer = 0 To dt.Rows.Count - 1
             If dt.Rows(i)("ID_STACK") < idSlot Then
-                set_slot(dt.Rows(i)("BLOCK_NAME"), dt.Rows(i)("ID_BLOCK"))
+                set_slot(dt.Rows(i)("20_STACKNAME"), dt.Rows(i)("ID_STACK"))
                 Exit For
             End If
         Next
@@ -243,23 +275,48 @@ Public Class FormVMT
         Dim iTier As Long = str(0).Replace("pnl_cell_tier", "")
         Dim iRow As String = str(1).PadLeft(2, "0")
         Dim res As DialogResult
+        Dim dt As DataTable
         If _formMode = formMode._onPlacement Then
 #Region "Save OnPlacement"
             'validasi placement
-            If pnl_cell.Controls.Count > 0 Then
+
+            If CType(sender, Control).Parent.Name <> "pnl_visual_block_slot" Then
                 MessageBoxEx.Show("Location is already in used.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
+            End If
+            'get cont size based iso code
+            dt = fc_vmtyrd_getjob_contsize(pubApiAddress, "no_cont=" & txt_no_cont.Text)
+            If dt.Rows.Count > 0 Then
+                'jika cont size > 20 then
+                If dt.Rows(0)("SIZE") > 20 Then
+                    dt = fc_vmtyrd_plcmnt_check_next_slot(pubApiAddress, "id_block=" & txt_block.Tag & "&row=" & iRow & "&tier=" & iTier & "&id_stack=" & txt_slot.Tag)
+                    If dt.Rows.Count > 0 Then
+                        If dt.Rows(0)("STATUS") <> 0 Or dt.Rows(0)("USE_FLAG") = "N" Then
+                            'Block-row-tier dari slot selanjutnya sudah terpakai
+                            MessageBoxEx.Show("Block-Row-Tier of next slot is not available for Size/Commodity Container.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Return
+                        End If
+                    Else
+                        'tidak ada slot selanjutnya
+                        MessageBoxEx.Show("Block-Row-Tier of next slot is not available for Size/Commodity Container.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+                End If
             End If
 
             res = MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & txt_block.Text & "-" & txt_slot.Text & "-" & iRow & "-" & iTier, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If res <> DialogResult.Yes Then Return
 
             'check kondisi job
-            If _selectedJob.Job = "DS" Then
-
-            ElseIf _selectedJob.Job = "GI" Then
-
+            Dim job As String = ""
+            If dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then '_selectedJob.Job = "DS"
+                job = "DS"
+            ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then '_selectedJob.Job = "GI"
+                job = "GI"
             End If
+            Dim isOk As Boolean = fc_vmtyrd_plcmnt(job, dtJobSelected.Rows(0)("TRUCK_ID"), dtJobSelected.Rows(0)("NO_CONT"),
+                    dtJobSelected.Rows(0)("POINT"), dtJobSelected.Rows(0)("ID_VVD"), dtJobSelected.Rows(0)("ID_CONT_DATA"),
+                    _pubUser, _pubMch, txt_block.Tag, txt_block.Text, iRow, iTier, txt_slot.Tag, dtJobSelected.Rows(0)("SIZE"))
 #End Region
         ElseIf _formMode = formMode._onChasis Then
 #Region "Save onChassis"
@@ -357,6 +414,7 @@ Public Class FormVMT
         Dim pnlChld As Panel
         Dim iTier As Long = maxTier
         Dim posTier As Long = 0
+        Dim dtSize As DataTable
         Do While iTier >= 1
             For Each lblRow As Label In pnl_row.Controls
                 'create panel cell
@@ -382,7 +440,8 @@ Public Class FormVMT
                 End If
 
                 'get cell info
-                dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock & "&tier=" & iTier & "&row=" & CLng(Replace(lblRow.Name, "lbl_row", "")))
+                dt = fc_vmtyrd_getcell(pubApiAddress, "id_block=" & idBlock & "&tier=" & iTier & "&row=" &
+                                       CLng(Replace(lblRow.Name, "lbl_row", "")) & "&id_stack=" & txt_slot.Tag)
 
                 If dt.Rows.Count > 0 Then
                     'id cell di simpan di panel cell tag, supaya saat pengecekan cell save 
@@ -395,6 +454,18 @@ Public Class FormVMT
                         Continue For
                     ElseIf dt.Rows(0)("STATUS") <> 1 Then
                         Continue For 'ONLY FOR STATUS=1 
+                    End If
+                    'check size
+                    dtSize = fc_vmtyrd_getjob_contsize(pubApiAddress, "no_cont=" & dt.Rows(0)("NO_CONT"))
+                    If dtSize.Rows(0)("SIZE") > 20 Then
+                        'SIZE > 20, CEK APAKAH ADA DATA DI SLOT SEBELUMNYA
+                        dtSize = fc_vmtyrd_check_prev_slot(pubApiAddress, "id_block=" & idBlock & "&tier=" & iTier & "&row=" &
+                                       CLng(Replace(lblRow.Name, "lbl_row", "")) & "&id_stack=" & txt_slot.Tag)
+                        If dtSize.Rows.Count > 0 Then
+                            'jika ada maka cell ini di SILANG
+                            pnl.Controls.Add(New PictureBox With {.Image = My.Resources.Red_Cross_PNG_File, .SizeMode = PictureBoxSizeMode.StretchImage, .Dock = DockStyle.Fill, .Visible = True})
+                            Continue For
+                        End If
                     End If
                     'add no cont
                     pnlChld = New Panel
@@ -467,8 +538,8 @@ Public Class FormVMT
     End Sub
 
     Private Sub lbl_list_job_Click(sender As Object, e As EventArgs)
-        txt_no_cont.Text = CType(CType(sender, Label).Parent, PanelEx).Name
         'find pa plan control and pa plan loc
+        txt_no_cont.Text = sender.PARENT.NAME
         Dim str As String() = Strings.Split(CType(CType(sender, Label).Parent, PanelEx).Controls(0).Name, "_loc")
         Dim strLoc As String() = Split(str(1), "-") 'split pa plan; format block_name, stack_name, row, tier
 
@@ -480,13 +551,11 @@ Public Class FormVMT
 
         Dim iTier As Long = strLoc(3), iRow As Long = strLoc(2)
         Dim ctrl As Control() = pnl_visual_block_slot.Controls.Find("pnl_cell_tier" & iTier & "_row" & iRow, True)
+        dtJobSelected = Nothing
+        dtJobSelected = dtJob.Select("NO_CONT= '" & txt_no_cont.Text & "' AND TRUCK_ID = " & CType(CType(sender, Label).Parent, PanelEx).Tag).CopyToDataTable
         _preferedCell = ctrl(0)
         _preferedCell.BackColor = Color.FromArgb(255, 255, 192)
-
-        _selectedJob.ContNo = txt_no_cont.Text
-        _selectedJob.Job = sender.parent.controls(2).text
-        _selectedJob.Location = str(1)
-
+        btn_chasis.Visible = dtJobSelected.Rows(0)("JOB_STATUS") = "O" 'btn chassis hanya muncul jika status job = O
     End Sub
 
     Private Sub show_list_job()
@@ -494,8 +563,8 @@ Public Class FormVMT
         whereCondition = IIf(cmb_job.Text = "All", "", "&job_code=" & cmb_job.Text)
         whereCondition = whereCondition.Concat(whereCondition, "&block_code=" & IIf(cmb_block.Text = "All", "", cmb_block.Text))
         'unmark this before send to ILCS
-        'whereCondition = whereCondition.Concat(whereCondition, "&mch_code=" & _pubMch)
-        Dim dt As DataTable = fc_vmtyrd_getjob(pubApiAddress, whereCondition)
+        whereCondition = whereCondition.Concat(whereCondition, "&mch_code=" & _pubMch)
+        dtJob = fc_vmtyrd_getjob(pubApiAddress, whereCondition)
 
         'clear prev job list
         For Each obj As Control In pnl_job_list.Controls
@@ -507,11 +576,11 @@ Public Class FormVMT
         Next
         pnl_job_list.Controls.Clear()
 
-        For i As Integer = 0 To dt.Rows.Count - 1
+        For i As Integer = 0 To dtJob.Rows.Count - 1
             'add panel
             Dim objPnl As New PanelEx
-            objPnl.Name = dt.Rows(i)("NO_CONT")
-            objPnl.Tag = dt.Rows(i)("TRUCK_ID")
+            objPnl.Name = dtJob.Rows(i)("NO_CONT")
+            objPnl.Tag = dtJob.Rows(i)("TRUCK_ID")
             pnl_job_list.Controls.Add(objPnl)
             objPnl.Dock = DockStyle.Top
             objPnl.Padding = New Windows.Forms.Padding(5)
@@ -522,14 +591,13 @@ Public Class FormVMT
             objPnl.Visible = True
             objPnl.Size = pnl_job.Size
             objPnl.Style.BackColor1.Color = SystemColors.ButtonFace
-            'objPnl.Name = dt.Rows(i)("TRUCK_ID")
             Dim lbl As Label
 
             'add label block cell slot (?)
             lbl = New Label
             lbl.Dock = DockStyle.Top
-            lbl.Name = "lbl_pa_plan" & dt.Rows(i)("NO_CONT") & "_loc" & dt.Rows(i)("PA_PLAN")
-            lbl.Text = dt.Rows(i)("PA_PLAN") & " " & dt.Rows(i)("WEIGHT") & "T" & " " & dt.Rows(i)("TID") & " " & dt.Rows(i)("FA")
+            lbl.Name = "lbl_pa_plan" & dtJob.Rows(i)("NO_CONT") & "_loc" & dtJob.Rows(i)("PA_PLAN")
+            lbl.Text = dtJob.Rows(i)("PA_PLAN") & " " & dtJob.Rows(i)("WEIGHT") & "T" & " " & dtJob.Rows(i)("TID") & " " & dtJob.Rows(i)("FA")
             lbl.Visible = True
             lbl.TextAlign = ContentAlignment.MiddleLeft
             objPnl.Controls.Add(lbl)
@@ -537,10 +605,10 @@ Public Class FormVMT
             'add label cont_data
             lbl = New Label
             lbl.Dock = DockStyle.Top
-            lbl.Name = "lbl_cont_data_" & dt.Rows(i)("NO_CONT")
-            lbl.Text = dt.Rows(i)("NO_CONT") & " " & dt.Rows(i)("ISO") & " " &
-                dt.Rows(i)("COMMODITY") & " " & dt.Rows(i)("CLASS") & " " &
-                Strings.Left(dt.Rows(i)("ID_VVD"), 4) & " " & dt.Rows(i)("POD")
+            lbl.Name = "lbl_cont_data_" & dtJob.Rows(i)("NO_CONT")
+            lbl.Text = dtJob.Rows(i)("NO_CONT") & " " & dtJob.Rows(i)("ISO") & " " &
+                dtJob.Rows(i)("COMMODITY") & " " & dtJob.Rows(i)("CLASS") & " " &
+                Strings.Left(dtJob.Rows(i)("ID_VVD"), 4) & " " & dtJob.Rows(i)("POD")
             lbl.TextAlign = ContentAlignment.MiddleLeft
             lbl.Visible = True
             objPnl.Controls.Add(lbl)
@@ -548,14 +616,14 @@ Public Class FormVMT
             'add label job 
             lbl = New Label
             objPnl.Controls.Add(lbl)
-            lbl.Name = "lbl_job_" & dt.Rows(i)("NO_CONT")
+            lbl.Name = "lbl_job_" & dtJob.Rows(i)("NO_CONT")
             lbl.Size = lbl_job.Size
             lbl.TextAlign = ContentAlignment.MiddleCenter
             lbl.Dock = DockStyle.Left
-            If dt.Rows(i)("CLASS") & dt.Rows(i)("ONCH_PLCMT") = "IO" Then lbl.Text = "GO"
-            If dt.Rows(i)("CLASS") & dt.Rows(i)("ONCH_PLCMT") = "IP" Then lbl.Text = "DS"
-            If dt.Rows(i)("CLASS") & dt.Rows(i)("ONCH_PLCMT") = "EO" Then lbl.Text = "LD"
-            If dt.Rows(i)("CLASS") & dt.Rows(i)("ONCH_PLCMT") = "EP" Then lbl.Text = "GI"
+            If dtJob.Rows(i)("CLASS") & dtJob.Rows(i)("ONCH_PLCMT") = "IO" Then lbl.Text = "GO"
+            If dtJob.Rows(i)("CLASS") & dtJob.Rows(i)("ONCH_PLCMT") = "IP" Then lbl.Text = "DS"
+            If dtJob.Rows(i)("CLASS") & dtJob.Rows(i)("ONCH_PLCMT") = "EO" Then lbl.Text = "LD"
+            If dtJob.Rows(i)("CLASS") & dtJob.Rows(i)("ONCH_PLCMT") = "EP" Then lbl.Text = "GI"
             lbl.Visible = True
             lbl.SendToBack()
 
@@ -685,9 +753,10 @@ Public Class FormVMT
             _preferedCell = Nothing
         End If
         'clear selected cell
-        _selectedJob.ContNo = ""
-        _selectedJob.Job = ""
-        _selectedJob.Location = ""
+        '_selectedJob.ContNo = ""
+        '_selectedJob.Job = ""
+        '_selectedJob.Location = ""
+        dtJobSelected.Clear()
 
         btn_chasis.Visible = False
         _formMode = Nothing

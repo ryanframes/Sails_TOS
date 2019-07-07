@@ -492,5 +492,8 @@
   <ItemGroup>
     <None Include="Resources\remove-icon_20.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red-Cross-PNG-File.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

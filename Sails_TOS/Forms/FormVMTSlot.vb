@@ -52,16 +52,20 @@ Public Class FormVMTSlot
 
     Private Sub grid_data_DoubleClick(sender As Object, e As EventArgs) Handles grid_data.DoubleClick
         '_pForm.popReturn(grid_data.CurrentRow.Cells(0).Value) 'parent form must have popReturn public sub
-        _pForm.txt_slot.Text = grid_data.CurrentRow.Cells(0).Value
+        _pForm.set_slot(grid_data.CurrentRow.Cells(0).Value, grid_data.CurrentRow.Cells(1).Value)
         Me.Close()
     End Sub
 
     Sub fill_grid()
         Dim sCol As New Dictionary(Of String, String)
-        sCol.Add("20_STACKNAME", "20_STACKNAME")
         showDataGrid(grid_data, pubApiAddress, "rts_vmtyrd_getslotlist", "id_block=" & _idBlock, sCol)
         grid_data.RowHeadersVisible = False
         grid_data.ColumnHeadersVisible = False
+        grid_data.Columns("ID_STACK").Visible = False
         autoColWidth(0, grid_data)
+    End Sub
+
+    Private Sub grid_data_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles grid_data.CellContentClick
+
     End Sub
 End Class

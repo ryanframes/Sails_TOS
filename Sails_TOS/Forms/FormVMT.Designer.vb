@@ -133,7 +133,7 @@ Partial Class FormVMT
         Me.lbl_machine.Name = "lbl_machine"
         Me.lbl_machine.Size = New System.Drawing.Size(464, 25)
         Me.lbl_machine.TabIndex = 68
-        Me.lbl_machine.Text = "Machine : RGT 04"
+        Me.lbl_machine.Text = "Machine"
         Me.lbl_machine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lbl_user
