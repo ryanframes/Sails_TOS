@@ -752,6 +752,7 @@ Partial Class FormVMT
         Me.Controls.Add(Me.pnlTop)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "FormVMT"
         Me.Text = "VMT"
         Me.pnlTop.ResumeLayout(False)

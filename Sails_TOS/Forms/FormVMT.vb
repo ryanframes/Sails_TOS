@@ -259,7 +259,7 @@ Public Class FormVMT
 
     Private Sub pnl_cell_Click(sender As Object, e As EventArgs)
         'event saat cell di click 
-        If IsNothing(_formMode) Then Return
+        If _formMode = 0 Then Return
 
         If txt_no_cont.Text = "" Then Return
         'find tier and row address
@@ -276,10 +276,21 @@ Public Class FormVMT
         Dim iRow As String = str(1).PadLeft(2, "0")
         Dim res As DialogResult
         Dim dt As DataTable
+        Dim isOk As Boolean
+        'check kondisi job
+        Dim job As String = ""
+        If dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then
+            job = "DS"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then
+            job = "GI"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "O" Then
+            job = "GO"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "O" Then
+            job = "LD"
+        End If
         If _formMode = formMode._onPlacement Then
 #Region "Save OnPlacement"
             'validasi placement
-
             If CType(sender, Control).Parent.Name <> "pnl_visual_block_slot" Then
                 MessageBoxEx.Show("Location is already in used.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
@@ -303,26 +314,35 @@ Public Class FormVMT
                     End If
                 End If
             End If
-
-            res = MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & txt_block.Text & "-" & txt_slot.Text & "-" & iRow & "-" & iTier, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If res <> DialogResult.Yes Then Return
-
-            'check kondisi job
-            Dim job As String = ""
-            If dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then '_selectedJob.Job = "DS"
-                job = "DS"
-            ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then '_selectedJob.Job = "GI"
-                job = "GI"
-            End If
-            Dim isOk As Boolean = fc_vmtyrd_plcmnt(job, dtJobSelected.Rows(0)("TRUCK_ID"), dtJobSelected.Rows(0)("NO_CONT"),
+            'CHECK JIKA SUDAH DIPLACEMENT
+            dt = fc_vmtyrd_getcont(pubApiAddress, "no_cont=" & dtJobSelected.Rows(0)("NO_CONT") &
+                                   "&point=" & dtJobSelected.Rows(0)("POINT") & "&id_vvd=" & dtJobSelected.Rows(0)("ID_VVD"))
+            If dt.Rows.Count > 0 Then
+                res = MessageBoxEx.Show("Change Location " & txt_no_cont.Text & " from " & vbCrLf & dt.Rows(0)("LOCATION") & " to " & txt_block.Text & "-" & txt_slot.Text & "-" & iRow & "-" & iTier, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If res <> DialogResult.Yes Then Return
+                'change placement
+                isOk = fc_vmtyrd_chgloc(dtJobSelected.Rows(0)("NO_CONT"), dtJobSelected.Rows(0)("POINT"),
+                    dtJobSelected.Rows(0)("ID_VVD"), _pubUser, _pubMch, txt_block.Tag, txt_block.Text, iRow, iTier, txt_slot.Tag,
+                    dtJobSelected.Rows(0)("SIZE"), dt.Rows(0)("ID_BLOCK"), dt.Rows(0)("ROW"), dt.Rows(0)("TIER"))
+            Else
+                'JIKA NEW PLACEMENT HANYA Khusus CLASS = I & ONCH_PLCMT = P --> DS DAN if CLASS = E & ONCH_PLCMT = P --> GI
+                'If job = "DS" Or job = "GI" Then
+                res = MessageBoxEx.Show("Stack " & txt_no_cont.Text & " in " & txt_block.Text & "-" & txt_slot.Text & "-" & iRow & "-" & iTier, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If res <> DialogResult.Yes Then Return
+                'new placement
+                isOk = fc_vmtyrd_plcmnt(job, dtJobSelected.Rows(0)("TRUCK_ID"), dtJobSelected.Rows(0)("NO_CONT"),
                     dtJobSelected.Rows(0)("POINT"), dtJobSelected.Rows(0)("ID_VVD"), dtJobSelected.Rows(0)("ID_CONT_DATA"),
                     _pubUser, _pubMch, txt_block.Tag, txt_block.Text, iRow, iTier, txt_slot.Tag, dtJobSelected.Rows(0)("SIZE"))
-#End Region
-        ElseIf _formMode = formMode._onChasis Then
-#Region "Save onChassis"
-
+                'Else
+                '    MessageBoxEx.Show("Record Placement only for Job Type GI or GS", "Message", MessageBoxButtons.OK, MessageBoxIcon.Question)
+                '    Return
+                'End If
+            End If
+            btn_clear_selection.PerformClick()
 #End Region
         End If
+        'REFRESH VISUALISASI
+        refresh_visualisasi()
     End Sub
 
     Private Sub show_list_row_tier()
@@ -434,8 +454,9 @@ Public Class FormVMT
                 If iTier > avbTier Then
                     'jika tier i lebih besar dari avb tier maka 
                     pnl.Enabled = False
-                    pnl.BackgroundImage = My.Resources.remove_icon_20
-                    pnl.BackgroundImageLayout = ImageLayout.Tile
+                    pnl.Controls.Add(New PictureBox With {.Image = My.Resources.remove_icon_20, .SizeMode = PictureBoxSizeMode.StretchImage, .Dock = DockStyle.Fill, .Visible = True})
+                    'pnl.BackgroundImage = My.Resources.remove_icon_20
+                    'pnl.BackgroundImageLayout = ImageLayout.Tile
                     Continue For
                 End If
 
@@ -446,11 +467,12 @@ Public Class FormVMT
                 If dt.Rows.Count > 0 Then
                     'id cell di simpan di panel cell tag, supaya saat pengecekan cell save 
                     pnl.Tag = dt.Rows(0)("ID_CELL")
-                    If dt.Rows(0)("VOID") = 1 Then
+                    If IIf(IsDBNull(dt.Rows(0)("VOID")), 0, dt.Rows(0)("VOID")) = 1 Then
                         'check void status
                         pnl.Enabled = False
-                        pnl.BackgroundImage = My.Resources.remove_icon_20
-                        pnl.BackgroundImageLayout = ImageLayout.Tile
+                        pnl.Controls.Add(New PictureBox With {.Image = My.Resources.remove_icon_20, .SizeMode = PictureBoxSizeMode.StretchImage, .Dock = DockStyle.Fill, .Visible = True})
+                        'pnl.BackgroundImage = My.Resources.remove_icon_20
+                        'pnl.BackgroundImageLayout = ImageLayout.Tile
                         Continue For
                     ElseIf dt.Rows(0)("STATUS") <> 1 Then
                         Continue For 'ONLY FOR STATUS=1 
@@ -508,8 +530,8 @@ Public Class FormVMT
                         If TypeOf obj Is Panel Then
                             For Each ctrl As Control In obj.Controls
                                 If TypeOf ctrl Is Label Then
-                                    AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
-                                    AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
+                                    'AddHandler ctrl.MouseEnter, AddressOf lbl_cell_MouseEnter
+                                    'AddHandler ctrl.MouseLeave, AddressOf lbl_cell_MouseLeave
                                     AddHandler ctrl.Click, AddressOf pnl_cell_Click
                                 End If
                             Next
@@ -538,6 +560,9 @@ Public Class FormVMT
     End Sub
 
     Private Sub lbl_list_job_Click(sender As Object, e As EventArgs)
+        'set form mode to nothing
+        _formMode = Nothing
+
         'find pa plan control and pa plan loc
         txt_no_cont.Text = sender.PARENT.NAME
         Dim str As String() = Strings.Split(CType(CType(sender, Label).Parent, PanelEx).Controls(0).Name, "_loc")
@@ -545,17 +570,17 @@ Public Class FormVMT
 
         'set prev preferred cell bg to normal
         If _preferedCell IsNot Nothing Then _preferedCell.BackColor = SystemColors.HighlightText
-        'check job status
-        btn_chasis.Visible = sender.parent.controls(2).text = "GO" Or sender.parent.controls(2).text = "LD" 'job status sudah on chasis
-        If strLoc(0) <> txt_block.Text Or strLoc(1) <> txt_slot.Text Then Return
-
-        Dim iTier As Long = strLoc(3), iRow As Long = strLoc(2)
-        Dim ctrl As Control() = pnl_visual_block_slot.Controls.Find("pnl_cell_tier" & iTier & "_row" & iRow, True)
+        'get onch_plcmt selected job
         dtJobSelected = Nothing
         dtJobSelected = dtJob.Select("NO_CONT= '" & txt_no_cont.Text & "' AND TRUCK_ID = " & CType(CType(sender, Label).Parent, PanelEx).Tag).CopyToDataTable
+            btn_chasis.Visible = dtJobSelected.Rows(0)("ONCH_PLCMT") = "O" 'btn chassis hanya muncul jika status job = O
+        If strLoc(0) <> txt_block.Text Or strLoc(1) <> txt_slot.Text Then Return
+
+        'find prefered cell, and change its bgcolor
+        Dim iTier As Long = strLoc(3), iRow As Long = strLoc(2)
+        Dim ctrl As Control() = pnl_visual_block_slot.Controls.Find("pnl_cell_tier" & iTier & "_row" & iRow, True)
         _preferedCell = ctrl(0)
         _preferedCell.BackColor = Color.FromArgb(255, 255, 192)
-        btn_chasis.Visible = dtJobSelected.Rows(0)("JOB_STATUS") = "O" 'btn chassis hanya muncul jika status job = O
     End Sub
 
     Private Sub show_list_job()
@@ -767,7 +792,52 @@ Public Class FormVMT
     End Sub
 
     Private Sub btn_chasis_Click(sender As Object, e As EventArgs) Handles btn_chasis.Click
-        _formMode = formMode._onChasis
+        '_formMode = formMode._onChasis
+        Dim isOk As Boolean
+        'check kondisi job
+        Dim job As String = ""
+        If dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then
+            job = "DS"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "P" Then
+            job = "GI"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "I" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "O" Then
+            job = "GO"
+        ElseIf dtJobSelected.Rows(0)("CLASS") = "E" And dtJobSelected.Rows(0)("ONCH_PLCMT") = "O" Then
+            job = "LD"
+        End If
+        'GET CONT CELL INFO
+        Dim dt As DataTable = fc_vmtyrd_getpaloc(pubApiAddress, "no_cont=" & dtJobSelected.Rows(0)("NO_CONT") &
+                                                 "&point=" & dtJobSelected.Rows(0)("POINT") & "&id_vvd=" & dtJobSelected.Rows(0)("ID_VVD"))
+        If dt.Rows.Count = 0 Then
+            'TIDAK ADA CONTAINER YANG STATUS = 1
+            MessageBoxEx.Show("No Placement Found for this Container.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        Dim res As DialogResult
+        Dim iRow As Integer = dt.Rows(0)("ROW")
+        Dim iTier As Integer = dt.Rows(0)("TIER")
+        res = MessageBoxEx.Show("Lift on " & txt_no_cont.Text & " to " & dtJobSelected.Rows(0)("TID"), "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If res = DialogResult.No Then Return
+        'get location of selected job
+#Region "Save onChassis"
+        'ON CHASIS HANYA Khusus CLASS = I & ONCH_PLCMT = O --> GO DAN if CLASS = E & ONCH_PLCMT = O --> LD
+        If job = "LD" Or job = "GO" Then
+            'CHECK JIKA ADA CONTAINER DIATAS CONTAINER YANG DIPILIH (TIER > TIER YG DIPILIH)
+            dt = fc_vmtyrd_plcmnt_check_next_tier(pubApiAddress, "id_block=" & txt_block.Tag & "&row=" & iRow & "&tier=" & iTier & "&id_stack=" & txt_slot.Tag)
+            If dt.Rows.Count > 1 Then
+                MessageBoxEx.Show("Can not Lift Container because there's a container above it.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            isOk = fc_vmtyrd_onchs(job, dtJobSelected.Rows(0)("TRUCK_ID"), dtJobSelected.Rows(0)("NO_CONT"),
+                        dtJobSelected.Rows(0)("POINT"), dtJobSelected.Rows(0)("ID_VVD"), dtJobSelected.Rows(0)("ID_CONT_DATA"),
+                        _pubUser, _pubMch, txt_block.Tag, txt_block.Text, iRow, iTier, txt_slot.Tag,
+                        dtJobSelected.Rows(0)("SIZE"))
+            'REFRESH VISUALISASI
+            refresh_visualisasi()
+        Else
+            MessageBoxEx.Show("On Chassis only for Job Type DS or GI", "Message", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        End If
+#End Region
     End Sub
 
 End Class
